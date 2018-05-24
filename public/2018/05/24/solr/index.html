@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Solr调研文档 | My Hexo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能Solr是Apache公司的一个基于Lucene框架的开源全文搜索服务器Solr如其在官网宣传的，有如下特性  先进的全文搜索能力：支持使用短语、通配符、集合、聚合等进行搜索 为高通量网络环境优化过 标准的开放接口：使用xml、json、http进行搜索和配置 有功能全面的网页管理界面：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solr调研文档">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/solr/index.html">
+<meta property="og:site_name" content="My Hexo Blog">
+<meta property="og:description" content="介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能Solr是Apache公司的一个基于Lucene框架的开源全文搜索服务器Solr如其在官网宣传的，有如下特性  先进的全文搜索能力：支持使用短语、通配符、集合、聚合等进行搜索 为高通量网络环境优化过 标准的开放接口：使用xml、json、http进行搜索和配置 有功能全面的网页管理界面：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片4.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片5.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片6.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片7.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/solr/图片8.png">
+<meta property="og:updated_time" content="2018-05-24T12:21:17.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solr调研文档">
+<meta name="twitter:description" content="介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能Solr是Apache公司的一个基于Lucene框架的开源全文搜索服务器Solr如其在官网宣传的，有如下特性  先进的全文搜索能力：支持使用短语、通配符、集合、聚合等进行搜索 为高通量网络环境优化过 标准的开放接口：使用xml、json、http进行搜索和配置 有功能全面的网页管理界面：">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/24/solr/图片1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="My Hexo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">My Hexo Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-solr" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/solr/" class="article-date">
+  <time datetime="2018-05-24T03:55:48.176Z" itemprop="datePublished">2018-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Solr调研文档
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能<br><strong>Solr</strong>是Apache公司的一个基于Lucene框架的开源全文搜索服务器<br><strong>Solr</strong>如其在官网宣传的，有如下特性</p>
+<ul>
+<li>先进的全文搜索能力：支持使用短语、通配符、集合、聚合等进行搜索</li>
+<li>为高通量网络环境优化过</li>
+<li>标准的开放接口：使用xml、json、http进行搜索和配置</li>
+<li>有功能全面的网页管理界面：使用自带的管理网页可以实现Solr支持的大部分功能：监控、配置、搜索</li>
+<li>易监控：使用JMX发布标准化的运行数据，自带slf4j日志，直接可在网页中查看</li>
+<li>可伸缩高可用：基于apache zookeeper ，易于服务器复制、分发、负载均衡</li>
+<li>易修改：每个核心（core）只需要修改两个配置文件就能作绝大部分功能的配置</li>
+<li>近实时索引</li>
+<li>易使用插件进行拓展：分词器、查询处理器都可以用自己的jar包定制</li>
+<li>富文本索引：支持对pdf、word等富文本进行索引</li>
+</ul>
+<hr>
+<h2 id="Solr官方文档"><a href="#Solr官方文档" class="headerlink" title="Solr官方文档"></a>Solr官方文档</h2><blockquote>
+<p>Solr官方的quickstart文档<a href="http://lucene.apache.org/solr/quickstart.html" target="_blank" rel="noopener">http://lucene.apache.org/solr/quickstart.html</a> ，直接搭建一个2个服务器2个shard组成的搜索服务器，帮助对solr的数据索引、搜索、分布式结构有所了解。缺点时文档使用的很多命令只在linux下生效，可以结合下文的使用流程使用windows下能用的命令<br>Solr官方文档 <a href="https://cwiki.apache.org/confluence/display/solr/About+This+Guide" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/About+This+Guide</a> 这是在线版的官方文档，有所有功能的介绍，但是举例和异常处理方式不大详细，没有对中文的特殊处理。网络上介绍solr的博客类文档恰好能补充，但因为solr版本繁杂，需要对照官方文档阅读。</p>
+</blockquote>
+<h2 id="Solr初步使用流程"><a href="#Solr初步使用流程" class="headerlink" title="Solr初步使用流程"></a>Solr初步使用流程</h2><p>下文介绍一个solr安装使用的例子，目标是对一批简历数据进行搜索。</p>
+<h3 id="例中软件环境"><a href="#例中软件环境" class="headerlink" title="例中软件环境"></a>例中软件环境</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">软件名称</th>
+<th style="text-align:right">软件版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:right">Windows10</td>
+</tr>
+<tr>
+<td style="text-align:left">JAVA版本</td>
+<td style="text-align:right">Java8 </td>
+</tr>
+<tr>
+<td style="text-align:left">Solr版本</td>
+<td style="text-align:right">Solr6.6.0</td>
+</tr>
+<tr>
+<td style="text-align:left">中文分词器</td>
+<td style="text-align:right">IK</td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><h4 id="1-下载安装Java"><a href="#1-下载安装Java" class="headerlink" title="1.下载安装Java"></a>1.下载安装Java</h4><p>目前版本的solr最低需要Java8，下载并安装。</p>
+<h4 id="2-下载Solr并解压"><a href="#2-下载Solr并解压" class="headerlink" title="2.下载Solr并解压"></a>2.下载Solr并解压</h4><p>官方下载页 <a href="http://lucene.apache.org/solr/mirrors-solr-latest-redir.html" target="_blank" rel="noopener">http://lucene.apache.org/solr/mirrors-solr-latest-redir.html</a> 下载后是个压缩包，解压后就算安装完成了</p>
+<h4 id="3-运行solr服务器"><a href="#3-运行solr服务器" class="headerlink" title="3.运行solr服务器"></a>3.运行solr服务器</h4><p>通过bin目录下的solr文件启动solr服务器，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin\solr start -p 8983</span><br></pre></td></tr></table></figure></p>
+<p>其中<strong>-p 8983</strong>是指定端口的参数，如果不指定默认开启的端口也是8983.</p>
+<h4 id="4-创建核心（core）"><a href="#4-创建核心（core）" class="headerlink" title="4.创建核心（core）"></a>4.创建核心（core）</h4><p>核心（core）是solr的一种概念，同一个core中使用同一份字段类型定义、同样的查询配置。搜索时也是需要指定某一个core进行查询的。<br>使用指令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin\solr create -c corename1</span><br></pre></td></tr></table></figure></p>
+<p>创建一个叫corename1的core。<br>或者，在<a href="http://localhost:8983/solr/#/" target="_blank" rel="noopener">http://localhost:8983/solr/#/</a> 的管理网页上的coreadmin菜单中也可以创建一个core<br>5.根据目标数据配置schema</p>
+<h4 id="Schema的意义"><a href="#Schema的意义" class="headerlink" title="#Schema的意义"></a>#Schema的意义</h4><p>搜索服务器建立数据索引的过程其实是按照固定格式导入数据，如何定义导入数据的格式就是由schema决定的了。schema定义了一些字段类型（field type）和字段（field），如果把要导入的数据类比为java中的对象，字段类型（field type）和字段（field）就类似于java中的变量类型和变量。在创建一个core之后，会自动在对应的core目录下的conf文件夹生成一个    managed-schema文件，这是由solr实时修改的schema配置文件，原则上不能直接修改。需要配置可以在网页端的schema页面进行修改。</p>
+<h4 id="Schema-xml文件关系"><a href="#Schema-xml文件关系" class="headerlink" title="#Schema.xml文件关系"></a>#Schema.xml文件关系</h4><p>如果要批量修改schema的字段配置，可以直接编辑文件schema.xml。在config目录下和schema配置相关的有这么三个文件：<br><img src="/2018/05/24/solr/./图片1.png" alt="Alt text"><br>一般技术博客会提到的文件是schema.xml，但是在6.6.0版本中schema.xml文件是不存在的，需要用户自己创建。他们之间的关系如下;<img src="/2018/05/24/solr/./图片2.png" alt="Alt text"><br>由关系图可见，要编辑schema文件，需要先删除managed-schema.xml和schema.xml.bak文件，自定义schema.xml，如果服务器重启后正确生成了managed-schema.xml和schema.xml.bak那说明配置成功，否则需要查看报错日志，修改schema.xml中的错误。<br>在初次配置之后想要修改配置文件，那就只需要修改schema.xml.bak再删除managed-schema.xml重启就行了。</p>
+<h5 id="Schema-xml文件内容格式"><a href="#Schema-xml文件内容格式" class="headerlink" title="Schema.xml文件内容格式"></a>Schema.xml文件内容格式</h5><p>Schema中主要内容是field和field type的定义。自动生成的managed-schema中有不少通用的field和field type定义，要自定义时可以仿照。<br>field定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;field name=<span class="string">"school"</span> type=<span class="string">"text_ik"</span> <span class="keyword">default</span>=<span class="string">""</span> indexed=<span class="string">"true"</span> stored=<span class="string">"true"</span>/&gt;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">这个例子里是五个常用的field属性 </span></span><br><span class="line"><span class="string">| &amp;nbsp;       |    &amp;nbsp;</span></span><br><span class="line"><span class="string">| :-------- | --------:</span></span><br><span class="line"><span class="string">| name	| 字段名，和要导入数据的字段名要一一对应</span></span><br><span class="line"><span class="string">| type	| 字段类型，要等于某个fieldtype</span></span><br><span class="line"><span class="string">| default	| 默认值</span></span><br><span class="line"><span class="string">| indexed	| 是否被索引，只有被索引的字段才能用于搜索</span></span><br><span class="line"><span class="string">| stored	| 是否被保存，只有被保存的字段才能被搜索后获取</span></span><br><span class="line"><span class="string">更多属性见https://cwiki.apache.org/confluence/display/solr/Defining+Fields</span></span><br><span class="line"><span class="string">field type定义：</span></span><br><span class="line"><span class="string">正如java中的类型一样，text、long……等常用类型已经在自动生成的配置中有了，对中文搜索来说，最重要的需要新定义的field type应该是中文文本类型了。定义前需要选定中文分词器，我试过两种smartcn和ik分词。</span></span><br><span class="line"><span class="string">smartcn是solr下载后自带的，在solr-6.6.0\contrib\analysis-extras\lucene-libs\ lucene-analyzers-smartcn-6.6.0.jar。但是smartcn是纯粹的计算分词，没有使用分词表进行拓展。拷贝jar包到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\lib下（solr-6.6.0\server\solr-webapp\下的目录结构类似于j2ee网站的结构），并在schema.xml中如此配置：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span> javascript</span><br><span class="line">&lt;fieldType name=<span class="string">"text_smartcn"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span> positionIncrementGap=<span class="string">"0"</span>&gt;</span><br><span class="line">&lt;analyzer type=<span class="string">"index"</span>&gt;</span><br><span class="line">   &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory"</span>/&gt;</span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">&lt;analyzer type="query"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;tokenizer class="org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory"/</span>&gt;</span><br><span class="line"> &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Ik分词版本较多，而且github上的版本已经很旧了，但是它支持使用分词表帮助分词。<br>依然是把jar包放到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\lib下，把剩下的一个xml和两个dc文件放到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\classes下，然后在schema.xml中加入如下内容<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;fieldType name=<span class="string">"text_ik"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span>&gt;</span><br><span class="line">    &lt;analyzer type=<span class="string">"index"</span>&gt;</span><br><span class="line">      &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.wltea.analyzer.lucene.IKTokenizerFactory"</span> useSmart=<span class="string">"false"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">    &lt;analyzer type="query"&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" useSmart="true" /</span>&gt;</span><br><span class="line">      &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.SynonymGraphFilterFactory"</span> synonyms=<span class="string">"synonyms.txt"</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
+<p>fieldtype定义好中文类型后，在field中指定对应的类型，之后的索引和搜索对于中文处理就变得简单了。</p>
+<h4 id="6-建立索引-导入数据"><a href="#6-建立索引-导入数据" class="headerlink" title="6 .建立索引/导入数据"></a>6 .建立索引/导入数据</h4><p>Solr支持的导入数据来源有数据库\xml\json\富文本。</p>
+<h5 id="导入xml-json-富文本"><a href="#导入xml-json-富文本" class="headerlink" title="导入xml\json\富文本"></a>导入xml\json\富文本</h5><p>可以使用网页、命令行方式、api方式导入数据,目前看来在win10中网页导入文本文件有bug，就先介绍命令行方式这种最快的方式。<br>导入文件要使用post工具，官方文档的指令在windows下不能使用，在命令行中输入类似指令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Dc=[corename] -Dauto=yes -Ddata=files -Drecursive=yes -jar example/exampledocs/post.jar G:\abc\*.json</span><br></pre></td></tr></table></figure></p>
+<p>需要填写的两个参数：dc是目标core的名字；最后用空格隔开的是目标文件，支持直接使用文件名和通配符，上面的例子指导入abc目录下所有.json文件。<br>如果导入的是富文本文件，富文本的内容不会像解析json一样按字段存储，而是存储为文件信息和内容两部分。</p>
+<h5 id="导入数据库表"><a href="#导入数据库表" class="headerlink" title="导入数据库表"></a>导入数据库表</h5><p>涉及到solr唯二配置文件中的solrconfig.xml，在solrconfig.xml中额外指定dataconfig.xml,用于设置数据库连接参数、查询语句、数据库字段与solr field的对应关系<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;requestHandler name=<span class="string">"/dataimport"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;  </span><br><span class="line">　     &lt;lst name=<span class="string">"defaults"</span>&gt;  </span><br><span class="line">　        &lt;str name=<span class="string">"config"</span>&gt;conf/dataconfig.xml&lt;<span class="regexp">/str&gt;  </span></span><br><span class="line"><span class="regexp">　     &lt;/</span>lst&gt;  </span><br><span class="line">　&lt;<span class="regexp">/requestHandler&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>以搜索简历为例，dataconfig.xml:中这样设置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;  </span><br><span class="line">&lt;dataConfig&gt;</span><br><span class="line">&lt;!-- The first element is the dataSource, <span class="keyword">in</span> <span class="keyword">this</span> <span class="keyword">case</span> an HSQLDB database.</span><br><span class="line">     The path to the JDBC driver and the JDBC URL and login credentials are all specified here.</span><br><span class="line">     Other permissible attributes include whether or not to autocommit to Solr, the batchsize</span><br><span class="line">     used <span class="keyword">in</span> the JDBC connection, a <span class="string">'readOnly'</span> flag. </span><br><span class="line">     The password attribute is optional <span class="keyword">if</span> there is no password set <span class="keyword">for</span> the DB.</span><br><span class="line">--&gt;</span><br><span class="line">  &lt;dataSource driver=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> url=<span class="string">"jdbc:oracle:thin:@172.29.88.178:1521:DBTEST"</span> user=<span class="string">"resumetest"</span> password=<span class="string">"resumetest"</span>/&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">Alternately the password can be encrypted <span class="keyword">as</span> follows. This is the value obtained <span class="keyword">as</span> a result <span class="keyword">of</span> the command</span><br><span class="line">openssl enc -aes<span class="number">-128</span>-cbc -a -salt -<span class="keyword">in</span> pwd.txt</span><br><span class="line">password=<span class="string">"U2FsdGVkX18QMjY0yfCqlfBMvAB4d3XkwY96L7gfO2o="</span> </span><br><span class="line">WHen the password is encrypted, you must provide an extra attribute</span><br><span class="line">encryptKeyFile=<span class="string">"/location/of/encryptionkey"</span></span><br><span class="line">This file should a text file <span class="keyword">with</span> a single line containing the encrypt/decrypt password</span><br><span class="line"> </span><br><span class="line">--&gt;</span><br><span class="line">&lt;!-- A <span class="string">'document'</span> element follows, containing multiple <span class="string">'entity'</span> elements.</span><br><span class="line">     Note that <span class="string">'entity'</span> elements can be nested, and <span class="keyword">this</span> allows the entity</span><br><span class="line">     relationships <span class="keyword">in</span> the sample database to be mirrored here, so that we can</span><br><span class="line">     generate a denormalized Solr record which may include multiple features</span><br><span class="line">     <span class="keyword">for</span> one item, <span class="keyword">for</span> instance --&gt;</span><br><span class="line">  &lt;<span class="built_in">document</span>&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- The possible attributes <span class="keyword">for</span> the entity element are described below.</span><br><span class="line">     Entity elements may contain one or more <span class="string">'field'</span> elements, which map</span><br><span class="line">     the data source field names to Solr fields, and optionally specify</span><br><span class="line">     per-field transformations --&gt;</span><br><span class="line">&lt;!-- <span class="keyword">this</span> entity is the <span class="string">'root'</span> entity. --&gt;</span><br><span class="line">    &lt;entity name=<span class="string">"resume"</span> query=<span class="string">"select * from RESUME"</span></span><br><span class="line">            deltaQuery=<span class="string">"select id from item where LAST_UPDATE_DATE &gt; '$&#123;dataimporter.last_index_time&#125;'"</span> pk=<span class="string">"id"</span> transformer=<span class="string">"ClobTransformer"</span>&gt;</span><br><span class="line">      &lt;field column=<span class="string">"RESUME_ID"</span> name=<span class="string">"id"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"TAG_ID"</span> name=<span class="string">"tagID"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"STAGE_ID"</span> name=<span class="string">"stageId"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"DEPT_ID"</span> name=<span class="string">"deptId"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"FLAG"</span> name=<span class="string">"flag"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"RESUME_NUMBER"</span> name=<span class="string">"resumeNumber"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NAME"</span> name=<span class="string">"name"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SEX"</span> name=<span class="string">"sex"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POSITION"</span> name=<span class="string">"position"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POSITION_DETAIL"</span> name=<span class="string">"positionDetail"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EDUCATION"</span> name=<span class="string">"education"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOOL"</span> name=<span class="string">"school"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"PHONE"</span> name=<span class="string">"phone"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EMAIL"</span> name=<span class="string">"email"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ADDRESS"</span> name=<span class="string">"address"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"BIRTHDAY"</span> name=<span class="string">"birthday"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"HEIGHT"</span> name=<span class="string">"height"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"WEIGHT"</span> name=<span class="string">"weight"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"GRADUATION_DATE"</span> name=<span class="string">"graduationDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"HEALTH_CONDITION"</span> name=<span class="string">"healthCondition"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"MARITAL_STATUS"</span> name=<span class="string">"maritalStatus"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"REGISTERED_PLACE_BEFORE"</span> name=<span class="string">"registeredPlaceBefore"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"IDENTITY_CARD_NUMBER"</span> name=<span class="string">"identityCardNumber"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"OVERSEAS_EXPERIENCE"</span> name=<span class="string">"overseasExperience"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POLITICAL_STATUS"</span> name=<span class="string">"politicalStatus"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CITY"</span> name=<span class="string">"city"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EMERGENCY_PHONE"</span> name=<span class="string">"emergencyPhone"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NATIONALITY"</span> name=<span class="string">"nationality"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NATIVE_PLACE"</span> name=<span class="string">"nativePlace"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SELF_EVALUATION_TITLE"</span> name=<span class="string">"selfEvaluationTitle"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SELF_EVALUATION_CONTENT"</span> name=<span class="string">"selfEvalutionContent"</span> clob=<span class="string">"true"</span>/&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOLARSHIP_LEVEL"</span> name=<span class="string">"scholarshipLevel"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"STUDENT_LEADER"</span> name=<span class="string">"studentLeader"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOOL_ACTIVITY"</span> name=<span class="string">"schoolActivity"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"AWARD"</span> name=<span class="string">"award"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CERTIFICATE"</span> name=<span class="string">"certificate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_LEVEL"</span> name=<span class="string">"englishLevel"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_SCORE"</span> name=<span class="string">"englishScore"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_CERTIFICATE1"</span> name=<span class="string">"englishCertificate1"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_CERTIFICATE2"</span> name=<span class="string">"englishCertificate2"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LANGUAGE"</span> name=<span class="string">"language"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"COMPUTER_SKILL"</span> name=<span class="string">"computerSkill"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"INTEREST"</span> name=<span class="string">"interest"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_JOB"</span> name=<span class="string">"expectedJob"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_CITY"</span> name=<span class="string">"expectedCity"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_SALARY"</span> name=<span class="string">"expectedSalary"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CREATED_BY"</span> name=<span class="string">"createdBy"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CREATION_DATE"</span> name=<span class="string">"CreationDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LAST_UPDATED_BY"</span> name=<span class="string">"lastUpdateBy"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LAST_UPDATE_DATE"</span> name=<span class="string">"lastUpdateDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"VERSION"</span> name=<span class="string">"version"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"MAJOR"</span> name=<span class="string">"major"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"BK_MAJOR"</span> name=<span class="string">"bkMajor"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"TAG_NOTE"</span> name=<span class="string">"tagNote"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CHECK_IN_FLAG"</span> name=<span class="string">"checkinFlag"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"FROZEN_FLAG"</span> name=<span class="string">"frozenFlag"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/entity&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span><span class="built_in">document</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/dataConfig&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>配置完毕后，使用网页操作导入数据<br><img src="/2018/05/24/solr/./图片3.png" alt="Alt text"></p>
+<h4 id="7-进行标准查询"><a href="#7-进行标准查询" class="headerlink" title="7.进行标准查询"></a>7.进行标准查询</h4><p>导入数据后，在solr的网页中就可以进行查询了，可配置参数如下<img src="/2018/05/24/solr/./图片4.png" alt="Alt text"><br>我填写的这些参数的含义：<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| q|     搜索内容<br>| fq|     对结果进行过滤，对某些字段的严格限制，类似于sql语句中的where field=value<br>| sort    | 排序字段，使用字段+空格+asc/desc表示排序方式<br>| start rows|     两个分页字段<br>| fl|     类似于sql的投影，限制返回的字段<br>| df        | 限制被查询的字段<br>| wt    | 结果返回的格式<br>| indent    true or false |控制结果是否缩进<br>| debug|    返回结果中显示哪些debug信息，query/timing/results/all(true)备选<br>更多参数见<a href="https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters#CommonQueryParameters-ThesortParameter" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters#CommonQueryParameters-ThesortParameter</a></p>
+<h4 id="8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表"><a href="#8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表" class="headerlink" title="8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表"></a>8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表</h4><p>搜索简历的过程中，遇到下面几种情况：<br>| &nbsp;       |    &nbsp; |    &nbsp;<br>| :——– | ——–| ——–:<br>| 搜索“南大”、“北大”，首先出来的是“东南大学”“东北大学”| solr认为文字的完全匹配有最高优先级，就算设置了同义词，搜索“南大”，东南大学和南京大学的比重也是等同的| 对于明显有特指的大学简称，设置单向同义词。在同义词表solr-6.6.0\server\solr\resume5\conf下，新增 北大 =&gt; 北京大学 的配置，对于其它常用大学简称，都设置双向同义词 西南财经大学,西南财大,西财,SWUFE<br>|某些大学缩写不被识别，搜索“南农”，会返回对“南”的搜索和“农”的搜索|正常语境中“X大”“上X”类的词语确实不该独立成词，但是在简历这种情况下需要这些词语成立| 对大学同义词表中的所有简称词，添加到拓展词典\solr-6.6.0\server\solr-webapp\webapp\WEB-INF\classes\mydict.dic中<br>| 搜索姓名“X波”，结果中地址、专业、简介的“电磁波”干扰了我的目标| 所有字段权值一样，姓名被分词后再各字段里都会出现|使用dismax/edismax搜索方式，给搜索的字段加上权重，给姓名和学校赋予最高权值。因为solr默认的算法设置中，对于“地址”这个20-30字的字段最容易返回，因此适当降低了搜索时对于“地址”的权重<br>edismax的参数如下：<img src="/2018/05/24/solr/./图片5.png" alt="Alt text"><br>常用参数设置：<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| q.alt|     当标准查询参数q不存在时生效的参数<br>| qf|     查询权重，格式字段名^权重 字段名^权重,默认权重为1。没有列出的字段不会被查询<br>| mm|结果返回数量，可以是数字和百分数的组合 3 代表只留3个；75%表示只留搜索结果的前75%；3&lt;75%表示最少保留max[3,75%]个结果；-号代表要去除的结果数量，如-3代表只去除3个结果<br>| pf|     排序权重，参数格式和qf完全一样，但是它不会把不符合的结果去除掉，只影响排序。</p>
+<p>edismax搜索还可以使用bf参数做自定义权值，参考<a href="https://cwiki.apache.org/confluence/display/solr/The+DisMax+Query+Parser" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/The+DisMax+Query+Parser</a> ，如果数据里有重要的数字、频率如点击率、发布日期……可以考虑用bf写一个简单的自定义权值。因为简历主要是文本，手写文档关系的算法比较复杂，我选择就使用qf，依赖于lucene的文档关系算法。</p>
+<h4 id="9-使用java借助solr搜索"><a href="#9-使用java借助solr搜索" class="headerlink" title="9.使用java借助solr搜索"></a>9.使用java借助solr搜索</h4><p>solr的外部调用方式很多，直接使用js写post请求访问solr服务器、对java\ruby\python都有调用API。Java的api比起直接用js，优点是不用自己拼查询url。对于maven项目，只需要添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.solr&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;solr-solrj&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;6.6.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>就足够调用solrj了，但是要下载的文件比较多，更新maven慢。Java代码中关键的代码不多，像下面的代码就已经能发起一次标准查询了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SolrClient solr = <span class="keyword">new</span> HttpSolrClient.Builder(solrUrl).build();</span><br><span class="line">        SolrQuery query = <span class="keyword">new</span> SolrQuery();</span><br><span class="line">        query.setQuery(searchParams.getQueryString());</span><br><span class="line">        query.set(<span class="string">"start"</span>, start);</span><br><span class="line">        query.set(<span class="string">"rows"</span>, limit);</span><br><span class="line">        query.set(<span class="string">"wt"</span>, <span class="string">"json"</span>);</span><br><span class="line"></span><br><span class="line">QueryResponse rsp = solr.query(query);</span><br><span class="line">SolrDocumentList docs = rsp.getResults();</span><br></pre></td></tr></table></figure></p>
+<p>Solr的高亮只需要一个hl参数，但是高亮哪些字段受到qf字段（dismax查询的权重字段）、hl.fl字段的影响。在没有设置qf时，hl.fl代表哪些字段会高亮，有qf时以qf为准。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query.setHighlight(<span class="keyword">true</span>);</span><br><span class="line">query.set(<span class="string">"defType"</span>, <span class="string">"dismax"</span>);</span><br><span class="line">query.set(<span class="string">"hl.fl"</span>,<span class="string">"*"</span>);</span><br><span class="line">query.set(<span class="string">"hl.usePhraseHighlighter"</span>,<span class="keyword">true</span>);</span><br><span class="line">query.set(<span class="string">"hl.highlightMultiTerm"</span>,<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">query.set(<span class="string">"hl.simple.pre"</span>,<span class="string">"&lt;span class=\"highlight\"&gt;"</span>);</span><br><span class="line">query.set(<span class="string">"hl.simple.post"</span>,<span class="string">"&lt;/span&gt;"</span>);</span><br><span class="line">query.set(<span class="string">"qf"</span>,<span class="string">"school^90 name^90 address^0.05 resumeNumber^1 position^90 education^1 major^5 telephone^1 mail^1"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>返回的高亮部分内容是作为一个独立的结构返回的，和我们在baidu、google搜索引擎里看到的结果不大一样。需要在获取后做一个处理:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">hlDocs.setNumFound(docs.getNumFound());</span><br><span class="line">Map&lt;String,Map&lt;String,List&lt;String&gt;&gt;&gt; tempMap = rsp.getHighlighting();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;docs.size();i++) &#123;</span><br><span class="line">    SolrDocument doc = docs.get(i);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"name"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"name"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"name"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"school"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"school"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"school"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"address"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"address"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"address"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"resumeNumber"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"resumeNumber"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"resumeNumber"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"position"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"position"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"position"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"education"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"education"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"education"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"major"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"major"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"major"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"telephone"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"telephone"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"telephone"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"mail"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"mail"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"mail"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    hlDocs.add(doc);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> hlDocs;</span><br></pre></td></tr></table></figure></p>
+<p>到这一步已经能做出一个较为完整的搜索简历的服务了。但是字段的权值、中文分词得不断根据实际数据变化和用户反馈改进才行，下面是一些能提高solr搜索结果满意度的方法。</p>
+<h3 id="Solr功能拓展"><a href="#Solr功能拓展" class="headerlink" title="Solr功能拓展"></a>Solr功能拓展</h3><h4 id="1-聚类搜索"><a href="#1-聚类搜索" class="headerlink" title="1.聚类搜索"></a>1.聚类搜索</h4><p>很多网站提供的分类别搜索，在solr里配置facet相关参数就可以做到。<br><img src="/2018/05/24/solr/./图片6.png" alt="Alt text"><br>facet常用参数如下:<br><img src="/2018/05/24/solr/./图片7.png" alt="Alt text"><br>facet.field代表要分类的字段，如果要分类多个字段，需要再设置一个facet字段。返回结果会在通常的查询结果后缀一个分类查询结果，如下图：<br><img src="/2018/05/24/solr/./图片8.png" alt="Alt text"><br>facet分类还支持根据时间分类、根据数字区间分类、分类过滤，详细内容见<a href="https://cwiki.apache.org/confluence/display/solr/Faceting#Faceting-Thefacet.fieldParameter" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/Faceting#Faceting-Thefacet.fieldParameter</a></p>
+<h4 id="2-拼音搜索"><a href="#2-拼音搜索" class="headerlink" title="2.拼音搜索"></a>2.拼音搜索</h4><p>增加拼音搜索的功能只要有能识别拼音的分词器就行了，找到拼音分词的jar包放到<br>WEB-INF/lib目录下，配合smartcn分词包或ik分词包使用。然后依然是在schema.xml中定义新的fieldtype<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;fieldType name=<span class="string">"text_pinyin"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span> positionIncrementGap=<span class="string">"0"</span>&gt; </span><br><span class="line">   &lt;analyzer type=<span class="string">"index"</span>&gt; </span><br><span class="line">   &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseSentenceTokenizerFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseWordTokenFilterFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinTransformTokenFilterFactory"</span> minTermLenght=<span class="string">"2"</span> /&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinNGramTokenFilterFactory"</span> minGram=<span class="string">"6"</span> maxGram=<span class="string">"20"</span> /&gt; </span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt; </span></span><br><span class="line"><span class="regexp">   &lt;analyzer type="query"&gt; </span></span><br><span class="line"><span class="regexp">   &lt;tokenizer class="org.apache.lucene.analysis.cn.smart.SmartChineseSentenceTokenizerFactory"/</span>&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseWordTokenFilterFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinTransformTokenFilterFactory"</span> minTermLenght=<span class="string">"2"</span> /&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinNGramTokenFilterFactory"</span> minGram=<span class="string">"6"</span> maxGram=<span class="string">"20"</span> /&gt; </span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt; </span></span><br><span class="line"><span class="regexp">&lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-相似数据推荐"><a href="#3-相似数据推荐" class="headerlink" title="3.相似数据推荐"></a>3.相似数据推荐</h4><p>类似于大多数网站的相似产品推荐，solr也提供了这种功能——morelikethis。通过制定搜索结果和某个字段，solr查找出在该字段上与当前搜索结果类似的结果。如果字段配置了termVectors=”true”，那么推荐会更加准确。下面这个搜索代表搜索resumeid为58901简历的类似简历，以专业为主要关联字段。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select? resumeId=<span class="number">58901</span>&amp;mlt=<span class="literal">true</span>&amp;mlt.fl=major&amp;mlt.mindf=<span class="number">1</span>&amp;mlt.mintf=<span class="number">1</span>&amp;wt=json</span><br></pre></td></tr></table></figure></p>
+<p>基本参数如下:<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| mlt    |     是否开启推荐<br>| mlt|     推荐的字段<br>| mlt.mintf    | 被关联文档里关键词出现次数多于这个值被忽略<br>| mlt.mindf|     所有文档里出现次数多于这个值的关键词被忽略<br>更详细的内容见<a href="https://cwiki.apache.org/confluence/display/solr/MoreLikeThis" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/MoreLikeThis</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/24/solr/" data-id="cjhkfcx6o00014swbc7j8glcm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/24/solr/">Solr调研文档</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/24/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 M Yi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

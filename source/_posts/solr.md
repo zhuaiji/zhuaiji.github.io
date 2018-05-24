@@ -1,7 +1,10 @@
 
-# Solr调研文档
+---
+title: Solr调研文档
+toc: true
+---
 
-@[苗羿]
+
 
 介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能
 **Solr**是Apache公司的一个基于Lucene框架的开源全文搜索服务器
@@ -19,7 +22,7 @@
 
 ----------
 
-[TOC]
+
 
 ## Solr官方文档
 
@@ -29,7 +32,7 @@
 
 ## Solr初步使用流程
 下文介绍一个solr安装使用的例子，目标是对一批简历数据进行搜索。
-###例中软件环境
+### 例中软件环境
 | 软件名称      |    软件版本
 | :-------- | --------:
 | 操作系统      |    Windows10
@@ -38,18 +41,18 @@
 | 中文分词器      |    IK
 
 
-###使用流程
-####1.下载安装Java
+### 使用流程
+#### 1.下载安装Java
 目前版本的solr最低需要Java8，下载并安装。
-####2.下载Solr并解压
+#### 2.下载Solr并解压
 官方下载页 http://lucene.apache.org/solr/mirrors-solr-latest-redir.html 下载后是个压缩包，解压后就算安装完成了
-####3.运行solr服务器
+#### 3.运行solr服务器
 通过bin目录下的solr文件启动solr服务器，例如：
 ``` bash
 bin\solr start -p 8983
 ```
 其中**-p 8983**是指定端口的参数，如果不指定默认开启的端口也是8983.
-####4.创建核心（core）
+#### 4.创建核心（core）
 核心（core）是solr的一种概念，同一个core中使用同一份字段类型定义、同样的查询配置。搜索时也是需要指定某一个core进行查询的。
 使用指令：
 ``` bash
@@ -58,12 +61,12 @@ bin\solr create -c corename1
 创建一个叫corename1的core。
 或者，在http://localhost:8983/solr/#/ 的管理网页上的coreadmin菜单中也可以创建一个core
 5.根据目标数据配置schema
-#####Schema的意义
+#### #Schema的意义
 搜索服务器建立数据索引的过程其实是按照固定格式导入数据，如何定义导入数据的格式就是由schema决定的了。schema定义了一些字段类型（field type）和字段（field），如果把要导入的数据类比为java中的对象，字段类型（field type）和字段（field）就类似于java中的变量类型和变量。在创建一个core之后，会自动在对应的core目录下的conf文件夹生成一个	managed-schema文件，这是由solr实时修改的schema配置文件，原则上不能直接修改。需要配置可以在网页端的schema页面进行修改。
-#####Schema.xml文件关系
+#### #Schema.xml文件关系
 如果要批量修改schema的字段配置，可以直接编辑文件schema.xml。在config目录下和schema配置相关的有这么三个文件：
-![Alt text](./图片1.png)
-一般技术博客会提到的文件是schema.xml，但是在6.6.0版本中schema.xml文件是不存在的，需要用户自己创建。他们之间的关系如下;![Alt text](./图片2.png)
+![Alt text](图片1.png)
+一般技术博客会提到的文件是schema.xml，但是在6.6.0版本中schema.xml文件是不存在的，需要用户自己创建。他们之间的关系如下;![Alt text](图片2.png)
 由关系图可见，要编辑schema文件，需要先删除managed-schema.xml和schema.xml.bak文件，自定义schema.xml，如果服务器重启后正确生成了managed-schema.xml和schema.xml.bak那说明配置成功，否则需要查看报错日志，修改schema.xml中的错误。
 在初次配置之后想要修改配置文件，那就只需要修改schema.xml.bak再删除managed-schema.xml重启就行了。
 ##### Schema.xml文件内容格式
@@ -108,9 +111,9 @@ Ik分词版本较多，而且github上的版本已经很旧了，但是它支持
   </fieldType>
 ```
 fieldtype定义好中文类型后，在field中指定对应的类型，之后的索引和搜索对于中文处理就变得简单了。
-####6 .建立索引/导入数据
+#### 6 .建立索引/导入数据
 Solr支持的导入数据来源有数据库\xml\json\富文本。
-#####导入xml\json\富文本
+##### 导入xml\json\富文本
 可以使用网页、命令行方式、api方式导入数据,目前看来在win10中网页导入文本文件有bug，就先介绍命令行方式这种最快的方式。
 导入文件要使用post工具，官方文档的指令在windows下不能使用，在命令行中输入类似指令：
 ```javascript
@@ -118,7 +121,7 @@ java -Dc=[corename] -Dauto=yes -Ddata=files -Drecursive=yes -jar example/example
 ```
 需要填写的两个参数：dc是目标core的名字；最后用空格隔开的是目标文件，支持直接使用文件名和通配符，上面的例子指导入abc目录下所有.json文件。
 如果导入的是富文本文件，富文本的内容不会像解析json一样按字段存储，而是存储为文件信息和内容两部分。
-#####导入数据库表
+##### 导入数据库表
 涉及到solr唯二配置文件中的solrconfig.xml，在solrconfig.xml中额外指定dataconfig.xml,用于设置数据库连接参数、查询语句、数据库字段与solr field的对应关系
 ```javascript
   <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">  
@@ -222,9 +225,9 @@ This file should a text file with a single line containing the encrypt/decrypt p
 </dataConfig>
 ```
 配置完毕后，使用网页操作导入数据
-![Alt text](./图片3.png)
-####7.进行标准查询
-导入数据后，在solr的网页中就可以进行查询了，可配置参数如下![Alt text](./图片4.png)
+![Alt text](图片3.png)
+#### 7.进行标准查询
+导入数据后，在solr的网页中就可以进行查询了，可配置参数如下![Alt text](图片4.png)
 我填写的这些参数的含义：
 | &nbsp;       |    &nbsp;
 | :-------- | --------:
@@ -239,14 +242,14 @@ This file should a text file with a single line containing the encrypt/decrypt p
 | debug|	返回结果中显示哪些debug信息，query/timing/results/all(true)备选
 更多参数见https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters#CommonQueryParameters-ThesortParameter
 
-####8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表
+#### 8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表
 搜索简历的过程中，遇到下面几种情况：
 | &nbsp;       |    &nbsp; |    &nbsp; 
 | :-------- | --------| --------:
 | 搜索“南大”、“北大”，首先出来的是“东南大学”“东北大学”| solr认为文字的完全匹配有最高优先级，就算设置了同义词，搜索“南大”，东南大学和南京大学的比重也是等同的| 对于明显有特指的大学简称，设置单向同义词。在同义词表solr-6.6.0\server\solr\resume5\conf下，新增 北大 => 北京大学 的配置，对于其它常用大学简称，都设置双向同义词 西南财经大学,西南财大,西财,SWUFE 
 |某些大学缩写不被识别，搜索“南农”，会返回对“南”的搜索和“农”的搜索|正常语境中“X大”“上X”类的词语确实不该独立成词，但是在简历这种情况下需要这些词语成立| 对大学同义词表中的所有简称词，添加到拓展词典\solr-6.6.0\server\solr-webapp\webapp\WEB-INF\classes\mydict.dic中
 | 搜索姓名“X波”，结果中地址、专业、简介的“电磁波”干扰了我的目标| 所有字段权值一样，姓名被分词后再各字段里都会出现|使用dismax/edismax搜索方式，给搜索的字段加上权重，给姓名和学校赋予最高权值。因为solr默认的算法设置中，对于“地址”这个20-30字的字段最容易返回，因此适当降低了搜索时对于“地址”的权重 
-edismax的参数如下：![Alt text](./图片5.png)
+edismax的参数如下：![Alt text](图片5.png)
 常用参数设置：
 | &nbsp;       |    &nbsp;
 | :-------- | --------:
@@ -256,7 +259,7 @@ edismax的参数如下：![Alt text](./图片5.png)
 | pf| 	排序权重，参数格式和qf完全一样，但是它不会把不符合的结果去除掉，只影响排序。
 
 edismax搜索还可以使用bf参数做自定义权值，参考https://cwiki.apache.org/confluence/display/solr/The+DisMax+Query+Parser ，如果数据里有重要的数字、频率如点击率、发布日期……可以考虑用bf写一个简单的自定义权值。因为简历主要是文本，手写文档关系的算法比较复杂，我选择就使用qf，依赖于lucene的文档关系算法。
-####9.使用java借助solr搜索
+#### 9.使用java借助solr搜索
 solr的外部调用方式很多，直接使用js写post请求访问solr服务器、对java\ruby\python都有调用API。Java的api比起直接用js，优点是不用自己拼查询url。对于maven项目，只需要添加
 ```java
 <dependency>
@@ -329,16 +332,16 @@ for(int i=0;i<docs.size();i++) {
 return hlDocs;
 ```
 到这一步已经能做出一个较为完整的搜索简历的服务了。但是字段的权值、中文分词得不断根据实际数据变化和用户反馈改进才行，下面是一些能提高solr搜索结果满意度的方法。
-###Solr功能拓展
-####1.聚类搜索
+### Solr功能拓展
+#### 1.聚类搜索
 很多网站提供的分类别搜索，在solr里配置facet相关参数就可以做到。
-![Alt text](./图片6.png)
+![Alt text](图片6.png)
 facet常用参数如下:
-![Alt text](./图片7.png)
+![Alt text](图片7.png)
 facet.field代表要分类的字段，如果要分类多个字段，需要再设置一个facet字段。返回结果会在通常的查询结果后缀一个分类查询结果，如下图：
-![Alt text](./图片8.png)
+![Alt text](图片8.png)
 facet分类还支持根据时间分类、根据数字区间分类、分类过滤，详细内容见https://cwiki.apache.org/confluence/display/solr/Faceting#Faceting-Thefacet.fieldParameter
-####2.拼音搜索
+#### 2.拼音搜索
 增加拼音搜索的功能只要有能识别拼音的分词器就行了，找到拼音分词的jar包放到
 WEB-INF/lib目录下，配合smartcn分词包或ik分词包使用。然后依然是在schema.xml中定义新的fieldtype
 ```javascript
@@ -357,7 +360,7 @@ WEB-INF/lib目录下，配合smartcn分词包或ik分词包使用。然后依然
      </analyzer> 
   </fieldType>
 ```
-####3.相似数据推荐
+#### 3.相似数据推荐
 类似于大多数网站的相似产品推荐，solr也提供了这种功能——morelikethis。通过制定搜索结果和某个字段，solr查找出在该字段上与当前搜索结果类似的结果。如果字段配置了termVectors="true"，那么推荐会更加准确。下面这个搜索代表搜索resumeid为58901简历的类似简历，以专业为主要关联字段。
 ```javascript
 select? resumeId=58901&mlt=true&mlt.fl=major&mlt.mindf=1&mlt.mintf=1&wt=json
