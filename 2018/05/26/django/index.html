@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目标：本文原目标为从已有的数据库表生成cms（后台管理）系统；也是使用django快速搭建一个网站的流程文档。  本地环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。开发环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。    &amp;nbsp; &amp;nbsp;     操作系统 Windows10 64bit   Python 2.7.11   Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用django从数据库反转成cms系统流程">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/django/index.html">
+<meta property="og:site_name" content="My Hexo Blog">
+<meta property="og:description" content="目标：本文原目标为从已有的数据库表生成cms（后台管理）系统；也是使用django快速搭建一个网站的流程文档。  本地环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。开发环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。    &amp;nbsp; &amp;nbsp;     操作系统 Windows10 64bit   Python 2.7.11   Django">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/django/图片1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/django/图片2.png">
+<meta property="og:updated_time" content="2018-05-28T11:26:28.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用django从数据库反转成cms系统流程">
+<meta name="twitter:description" content="目标：本文原目标为从已有的数据库表生成cms（后台管理）系统；也是使用django快速搭建一个网站的流程文档。  本地环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。开发环境不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。    &amp;nbsp; &amp;nbsp;     操作系统 Windows10 64bit   Python 2.7.11   Django">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/26/django/图片1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/26/django/"/>
+
+
+
+
+
+  <title>使用django从数据库反转成cms系统流程 | My Hexo Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Hexo Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Hexo Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用django从数据库反转成cms系统流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T21:07:16+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目标：本文原目标为从已有的数据库表生成cms（后台管理）系统；也是使用django快速搭建一个网站的流程文档。</p>
+<hr>
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。<br>开发环境<br>不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&nbsp;</th>
+<th style="text-align:right">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:right">Windows10 64bit</td>
+</tr>
+<tr>
+<td style="text-align:left">Python</td>
+<td style="text-align:right">2.7.11</td>
+</tr>
+<tr>
+<td style="text-align:left">Django</td>
+<td style="text-align:right">1.9.5</td>
+</tr>
+</tbody>
+</table>
+<p>部署环境</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&nbsp;</th>
+<th style="text-align:right">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:right">Linux CentOS 6.4 64bits Server</td>
+</tr>
+<tr>
+<td style="text-align:left">Python</td>
+<td style="text-align:right">2.7.11</td>
+</tr>
+<tr>
+<td style="text-align:left">Django</td>
+<td style="text-align:right">1.9.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Apache</td>
+<td style="text-align:right">2.2.15</td>
+</tr>
+<tr>
+<td style="text-align:left">mod_wsgi</td>
+<td style="text-align:right">4.5.5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h2><p>下文介绍搭建、发布django项目的流程</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>下载python-2.7.11.amd64.msi安装python，配置环境变量。cms中输入python显示版本号则安装成功。<br>解压Django-1.9.5.tar.gz后进入文件夹根目录运行命令python setup.py install 安装django。<br>安装可参考<a href="http://www.ziqiangxuetang.com/django/django-install.html" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django/django-install.html</a><br>编码和配置可以参考官方文档 <a href="https://docs.djangoproject.com/en/1.9/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/1.9/</a></p>
+<h3 id="新建项目与app"><a href="#新建项目与app" class="headerlink" title="新建项目与app"></a>新建项目与app</h3><p>cms中使用命令：<br>进入想要生成项目的目录，<br>输入django-admin.py startproject xxx 来新建项目<br>进入项目目录,<br>输入python manage.py startapp xxx  新建app<br>这时候的目录结构会是<br>根目录<br>    ——项目名<br>        …<br>        ——urls.py<br>        ——settings.py<br>        …<br>    ——app名<br>        …<br>        ——admin.py<br>        ——models.py<br>        …</p>
+<h4 id="反转数据库表"><a href="#反转数据库表" class="headerlink" title="反转数据库表"></a>反转数据库表</h4><p>安装mysql-connector-python-2.1.3-py2.7-winx64.msi (只能64位系统使用，否则安装时找不到python目录，32位可以从mysql官网<a href="http://dev.mysql.com/downloads/connector/python/下载" target="_blank" rel="noopener">http://dev.mysql.com/downloads/connector/python/下载</a>)<br>目前上述mysqldb驱动在不支持python3，可以使用pymysql代替，代码上可以完全不变，只需要在项目同名目录下的urls.py中添加：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure></p>
+<p>更改settings.py的数据库连接配置,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'database name’,</span></span><br><span class="line"><span class="string">        '</span>USER<span class="string">':’user name’,</span></span><br><span class="line"><span class="string">        '</span>PASSWORD<span class="string">':'</span>password<span class="string">',</span></span><br><span class="line"><span class="string">        '</span>HOST<span class="string">':'</span>ip<span class="string">',</span></span><br><span class="line"><span class="string">        '</span>PORT<span class="string">': '</span>port<span class="string">',</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>cmd中运行python manage.py inspectdb (&gt;directory)  反转数据库，如果没有报错的话，控制台/指定目录中就已经生成了翻转后的model代码。<br>运行python manage.py makemigrations  ， python manage.py migrate 同步数据库，django会自动在数据库中生成用户及历史记录相关表，如下<br><img src="/2018/05/26/django/./图片1.png" alt="Alt text"><br>如果数据表需要更新，或者想使用model生成表时，依然使用这两个命令python manage.py makemigrations  ， python manage.py migrate更新数据库。<br>python manage.py migrate 是执行app下的文件夹migrations下的.py文件，如果migrate命令一直在报错，可能是某个py文件的更改与数据库表的状态不同步（例如python manage.py makemigrations后又更改了表结构），那么删掉冲突后的文件，重新makemigrations，就可以解决持续报错的问题。</p>
+<h4 id="配置模型"><a href="#配置模型" class="headerlink" title="配置模型"></a>配置模型</h4><p>在项目中注册app，在settings.py中加入app<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">    <span class="string">'pcms'</span>,  <span class="comment">#app名</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>为了决定cms中有哪些模型需要被管理，app目录下的admnin.py中，加入如下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span>  Article             <span class="comment">#article是model名</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ArticleAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span> <span class="comment">#如果不配置以下内容，这里的class申明可以不需要</span></span><br><span class="line"><span class="comment">#列表显示项     </span></span><br><span class="line">list_display = (<span class="string">'page_title'</span>, <span class="string">'last_update_date'</span>,<span class="string">'type'</span>)</span><br><span class="line"><span class="comment">#新增和修改时的可编辑项</span></span><br><span class="line">fields = (<span class="string">'content'</span>,)</span><br><span class="line"><span class="comment">#过滤项，group by </span></span><br><span class="line">list_filter = (<span class="string">'type'</span>,)</span><br><span class="line"><span class="comment">#搜索项</span></span><br><span class="line">search_fields = (<span class="string">'page_title'</span>,)</span><br><span class="line">    <span class="comment">#每一页显示数目</span></span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line"> </span><br><span class="line">admin.site.register(Article, ArticleAdmin)</span><br></pre></td></tr></table></figure></p>
+<p>更多配置参考 <a href="https://docs.djangoproject.com/en/1.9/ref/contrib/admin/actions/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/1.9/ref/contrib/admin/actions/</a></p>
+<h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><p>cms中使用python manage.py createsuperuser创建超级管理员，按照提示输入用户名邮箱密码就可以了。<br>python manage.py runserver 或者 python manage.py runserver 端口号 开启服务器，访问’<a href="http://localhost:8000/admin或者http://localhost:端口号/admin/" target="_blank" rel="noopener">http://localhost:8000/admin或者http://localhost:端口号/admin/</a> 进入cms。</p>
+<h4 id="更改页面模板"><a href="#更改页面模板" class="headerlink" title="更改页面模板"></a>更改页面模板</h4><p>settings.py中设置TEMPLATES=[…]中的dirs可以设置项目模板路径，设置成<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DIRS'</span>: [os.path.join(BASE_DIR,<span class="string">'templates'</span>),],</span><br></pre></td></tr></table></figure></p>
+<p>指定basedir为根目录下的templates文件夹。在自己的项目根目录下建立templates\admin两个文件夹，用于存放自定义html模板。<br>python安装目录下的<br>Python27\Lib\site-packages\Django-1.9.5-py2.7.egg\django\contrib\admin\templates\admin<br>
+文件中夹中的html文件都是cms使用的html模板，可以从那里复制文件到templates\admin下并改写。其中{%xxx%}标签进行模块表示、逻辑判断，{{xxx}}标签代表context传到模板里的变量。
+配置成功后，django就会优先使用templates\admin下的自定义模板来展示界面了。
+</p>
+<h4 id="配置静态资源根目录（开发状态）"><a href="#配置静态资源根目录（开发状态）" class="headerlink" title="配置静态资源根目录（开发状态）"></a>配置静态资源根目录（开发状态）</h4><p>页面中如果需要使用自定义的css、js、图片等，需要配置静态资源路径。<br>在自动生成的项目中，如下两个配置项应该都已经配置好了：<br>settings.py的STATIC_URL = ‘/static/‘ 和   INSTALLED_APPS里的 ‘django.contrib.staticfiles’,<br>现在要做的只有在app下建立目录\static\admin\css,在其中添加自己的css，然后在模板中通过类似于<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel="stylesheet" type="text/css" href="&#123;% static "admin/css/changelists.css" %&#125;" /&gt;</span><br></pre></td></tr></table></figure></p>
+<p> 引用。要注意的是，如果自定义css和Python27\Lib\site-packages\Django-1.9.5-py2.7.egg\django\contrib\admin\static\admin\css<br>下的css文件重名，那么django会优先使用python目录下的，目前我还没发现怎么更改优先级，所以不能重名。</p>
+<h3 id="CMS的控件扩展"><a href="#CMS的控件扩展" class="headerlink" title="CMS的控件扩展"></a>CMS的控件扩展</h3><h4 id="下拉选择框"><a href="#下拉选择框" class="headerlink" title="下拉选择框"></a>下拉选择框</h4><p>更改models.py,先加入选择框属性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">STATUS_PUBLISH = (</span><br><span class="line">    (<span class="number">0</span>, <span class="string">'UnPublished'</span>),</span><br><span class="line">    (<span class="number">1</span>, <span class="string">'Published'</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>然后将选择框应用到属性中去<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span><span class="params">(models.Model)</span>:</span>   </span><br><span class="line">publish = models.IntegerField(choices=STATUS_PUBLISH,…)</span><br></pre></td></tr></table></figure></p>
+<p>这个属性对应的编辑项就是下拉框了</p>
+<h4 id="多选框"><a href="#多选框" class="headerlink" title="多选框"></a>多选框</h4><p>这个控件需要多对多的表关联<br>对于数据库表反转生成的项目，我在models.py文件里加入的关联关系在生成表的时候会因为表名前缀冲突而失败，还没有找到解决办法。最好先在表中添加多对多关系，然后反转。<br>上面的bug可以通过安装South管理model更改来避免<a href="http://www.ziqiangxuetang.com/django/django-schema-migration.html" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django/django-schema-migration.html</a><br>默认多选框的效果是这样的：</p>
+<p>但是这个在可选项变多时不大好选择，可以在admin.py中更改ModelAdmin类来更改样式，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">	…</span><br><span class="line">	filter_horizontal = (<span class="string">'authors'</span>,)</span><br></pre></td></tr></table></figure></p>
+<p>这时样式会变成<br><img src="/2018/05/26/django/./图片2.png" alt="Alt text"></p>
+<p>同理filter_vertical = (‘verticals’,) 样式就是竖过来的。</p>
+<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><p>models.py中，更改变量类型<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.FileField(upload_to = …)</span><br></pre></td></tr></table></figure></p>
+<p>对应的表单域就变为文件上传控件了<br>类型改为ImageField限制为图片上传<br>后台限值文件上传或大小TODO，预测需要自定义上传方法</p>
+<h3 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h3><p>目前已知有apche和uwsgi两种部署方式，本文在项目中使用过的是apache+mod_wsgi的部署方式。</p>
+<h4 id="部署前准备："><a href="#部署前准备：" class="headerlink" title="部署前准备："></a>部署前准备：</h4><p>所需版本的python源码包、django源码包 、数据库驱动pymysql的源码包、apache模块mod_wsgi的安装包、项目中导入的第三方包列表（如果服务器不连外网则需要源码包和它们引用到的所有源码包）</p>
+<h4 id="部署步骤："><a href="#部署步骤：" class="headerlink" title="部署步骤："></a>部署步骤：</h4><p>关掉selinux，安装mysql。<br>因为centos上都有旧版本的python，所以先更新python版本，要保留旧版本python推荐看这篇博客：<a href="http://www.cnblogs.com/lanxuezaipiao/archive/2012/10/21/2732864.html。" target="_blank" rel="noopener">http://www.cnblogs.com/lanxuezaipiao/archive/2012/10/21/2732864.html。</a><br>注意该篇博客中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3</span><br></pre></td></tr></table></figure></p>
+<p>要改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --enable-shared --prefix=/usr/local/python3</span><br></pre></td></tr></table></figure></p>
+<p>来确保安装动态链接库。安装后运行python命令看到版本为自己需要的就行了。<br>编译安装apache和mod_wsgi（apache也可以用yum安装，比较快捷，但是目前内网的apache版本有点旧）。编译安装mod_wsgi后，修改配置文件httpd.conf,添加如下一行：<br>LoadModule wsgi_module modules/mod_wsgi.so<br>用来加载wsgi服务。<br>安装和配置apache和mod_wsgi容易抛的错比较多，包括缺少依赖软件、配置文件出错、没找对网站默认存放目录……安装后最好实际检验一下：<br>测试是否配置成功，创建一个test.wsgi文件(wsgi文件就是一个python module，只不过扩展名是wsgi而已)，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def application(environ,start_response):</span><br><span class="line">       start_response(&quot;200 OK&quot;,[(&apos;content-type&apos;,&quot;text/html&quot;)])</span><br><span class="line">       return [&apos;&lt;html&gt;&lt;body&gt;Hello world!&lt;/body&gt;&lt;/html&gt;&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>修改httpd.conf配置文件，添加下面一行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WSGIScriptAlias /trac  目录/test.wsgi</span><br></pre></td></tr></table></figure></p>
+<p>重启apache服务器<br>在地址栏敲入<a href="http://127.0.0.1/trac，如果输出“hello" target="_blank" rel="noopener">http://127.0.0.1/trac，如果输出“hello</a> world”说明配置成功<br>然后就是配置自己的项目了，其实要改的只有一个httpd的配置文件，目的是在最后加上<br>WSGISocketPrefix /var/run/wsgi<br>WSGIScriptAlias / /var/www/workhours/workhours/wsgi.py<br>WSGIPythonPath /var/www/workhours/<br>WSGIDaemonProcess gongshitongji.tp-link.net python-path=/var/www/workhours/:/usr/local/python27/lib/python2.7/site-packages<br>WSGIProcessGroup gongshitongji.tp-link.net</p>
+<p>Alias /static/js/ /var/www/workhours/static/js/<br>Alias /static/css/ /var/www/workhours/static/css/<br>WSGISocketPrefix /var/run/wsgi<br>WSGIScriptAlias / 项目目录/wsgi.py<br>WSGIPythonPath 项目目录<br>WSGIDaemonProcess gongshitongji.tp-link.net<br>python-path=项目目录:python目录/site-packages<br>WSGIProcessGroup gongshitongji.tp-link.net</p>
+<p>Alias /static/js/ 项目目录/static/js/<br>Alias /static/css/ 项目目录/static/css/<br>Alias /static/admin/  django目录/static/admin</p>
+<p>&lt;Directory /var/www/workhours/workhours/&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br></p>
+<p>&lt;Directory /var/www/workhours/static/js&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br></p>
+<p>&lt;Directory /var/www/workhours/static/css&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br><br>这段配置定义了项目目录，静态文件目录。可以直接写在httpd.conf后面也可以自定义一个配置文件然后在httpd.conf中引用。<br>然后，重启apache，查看项目是否运行成功！<br>一般这个时候是打开django的报错页面，这时候打开apache的error.log可以看到为什么报错（一般是引用到的包没有找到），然后像开发时一样解决这些报错。<br>报错解决后，更改settings.py为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DEBUG=false</span><br><span class="line">ALLOWED_HOSTS = [&apos;*&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>就算发布成功了</p>
+<h3 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h3><p>admin的国际化可以在settings.py中设置，例如下面配置为中文。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANGUAGE_CODE = &apos;zh-hans&apos;</span><br></pre></td></tr></table></figure></p>
+<p>某些特定文字还可以通过“更改页面模板”中的手法来更改。models.py中的字段和模型本身的verbose_name也是很重要的汉化手段。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/solr/" rel="next" title="Solr调研文档">
+                <i class="fa fa-chevron-left"></i> Solr调研文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/28/log4j/" rel="prev" title="Log4j&&tomcat log调研文档">
+                Log4j&&tomcat log调研文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">M Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地环境"><span class="nav-number">1.</span> <span class="nav-text">本地环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现流程"><span class="nav-number">2.</span> <span class="nav-text">实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目与app"><span class="nav-number">2.2.</span> <span class="nav-text">新建项目与app</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反转数据库表"><span class="nav-number">2.2.1.</span> <span class="nav-text">反转数据库表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置模型"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动服务器"><span class="nav-number">2.2.3.</span> <span class="nav-text">启动服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改页面模板"><span class="nav-number">2.2.4.</span> <span class="nav-text">更改页面模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置静态资源根目录（开发状态）"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置静态资源根目录（开发状态）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS的控件扩展"><span class="nav-number">2.3.</span> <span class="nav-text">CMS的控件扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下拉选择框"><span class="nav-number">2.3.1.</span> <span class="nav-text">下拉选择框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多选框"><span class="nav-number">2.3.2.</span> <span class="nav-text">多选框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件上传"><span class="nav-number">2.3.3.</span> <span class="nav-text">文件上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器部署"><span class="nav-number">2.4.</span> <span class="nav-text">服务器部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署前准备："><span class="nav-number">2.4.1.</span> <span class="nav-text">部署前准备：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署步骤："><span class="nav-number">2.4.2.</span> <span class="nav-text">部署步骤：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化"><span class="nav-number">2.5.</span> <span class="nav-text">国际化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M Yi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

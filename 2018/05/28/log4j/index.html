@@ -79,13 +79,25 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="My Hexo Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="目标：本文目标在于介绍java项目记录日志的主流方式log4j和tomcat log的配置方式和配合使用方法，  log4j（1.2.x） log4j是Apache公司的一款用于在运行时输出日志的库。log4j的一个鲜明特征是它记录器（Logger）的分层记录，可以控制不同条件下输出日志的粒度，方便调试时获得详细信息和在正式环境减少日志输出量和存储成本。log4j目前支持的输出方式可以是文件，Ou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log4j&amp;&amp;tomcat log调研文档">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/log4j/index.html">
 <meta property="og:site_name" content="My Hexo Blog">
+<meta property="og:description" content="目标：本文目标在于介绍java项目记录日志的主流方式log4j和tomcat log的配置方式和配合使用方法，  log4j（1.2.x） log4j是Apache公司的一款用于在运行时输出日志的库。log4j的一个鲜明特征是它记录器（Logger）的分层记录，可以控制不同条件下输出日志的粒度，方便调试时获得详细信息和在正式环境减少日志输出量和存储成本。log4j目前支持的输出方式可以是文件，Ou">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/图片3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/图片4.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/图片5.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/图片6.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/捕获1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/捕获.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/log4j/捕获3.PNG">
+<meta property="og:updated_time" content="2018-05-29T04:21:50.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My Hexo Blog">
+<meta name="twitter:title" content="Log4j&amp;&amp;tomcat log调研文档">
+<meta name="twitter:description" content="目标：本文目标在于介绍java项目记录日志的主流方式log4j和tomcat log的配置方式和配合使用方法，  log4j（1.2.x） log4j是Apache公司的一款用于在运行时输出日志的库。log4j的一个鲜明特征是它记录器（Logger）的分层记录，可以控制不同条件下输出日志的粒度，方便调试时获得详细信息和在正式环境减少日志输出量和存储成本。log4j目前支持的输出方式可以是文件，Ou">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/28/log4j/图片3.png">
 
 
 
@@ -115,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/28/log4j/"/>
 
 
 
 
 
-  <title>My Hexo Blog</title>
+  <title>Log4j&&tomcat log调研文档 | My Hexo Blog</title>
   
 
 
@@ -140,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +225,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +257,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/28/log4j/" itemprop="url">Log4j&&tomcat log调研文档</a></h1>
+          <h1 class="post-title" itemprop="name headline">Log4j&&tomcat log调研文档</h1>
         
 
         <div class="post-meta">
@@ -298,9 +307,7 @@
       
 
       
-        
-          
-            <p>目标：本文目标在于介绍java项目记录日志的主流方式log4j和tomcat log的配置方式和配合使用方法，</p>
+        <p>目标：本文目标在于介绍java项目记录日志的主流方式log4j和tomcat log的配置方式和配合使用方法，</p>
 <hr>
 <h2 id="log4j（1-2-x）"><a href="#log4j（1-2-x）" class="headerlink" title="log4j（1.2.x）"></a>log4j（1.2.x）</h2><blockquote>
 <p>log4j是Apache公司的一款用于在运行时输出日志的库。log4j的一个鲜明特征是它记录器（Logger）的分层记录，可以控制不同条件下输出日志的粒度，方便调试时获得详细信息和在正式环境减少日志输出量和存储成本。log4j目前支持的输出方式可以是文件，OutputStream，java.io.Writer，远程log4j服务器，远程Unix Syslog守护程序或许多其他输出目标。log4j的旧版本1.x是目前使用较多的旧版本。</p>
@@ -385,8 +392,6 @@
 <h3 id="测试、正式环境推荐配置"><a href="#测试、正式环境推荐配置" class="headerlink" title="测试、正式环境推荐配置"></a>测试、正式环境推荐配置</h3><p>和现在项目相比，这种配置的目的是削减catalina.out的输出，作为替换用log4j的文件记录每天的日志。<br>log4j2.xml<br>配置的目的是设置两个文件MITP.log和MIFULL.log分别输出自己代码的异常和全部异常,在文件大小达到SizeBasedTriggeringPolicy设置的值后，会按日期分文件夹并存为压缩文件。文件存放地点是tomcat目录下的logs文件夹<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="comment">&lt;!--先定义默认的日志级别--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">status</span>=<span class="string">"error"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--先定义所有的appender--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appenders</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--这个输出控制台的配置 节点名字是Appender name属性下面配置logger要用到--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">"Console"</span> <span class="attr">target</span>=<span class="string">"SYSTEM_OUT"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"error"</span> <span class="attr">onMatch</span>=<span class="string">"ACCEPT"</span> <span class="attr">onMismatch</span>=<span class="string">"DENY"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">"RollingFileFull"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;sys:catalina.home&#125;/logs/MIFull.log"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">"$&#123;sys:catalina.home&#125;/logs/$$&#123;date:yyyy-MM&#125;/MIFULL-%d&#123;MM-dd-yyyy&#125;-%i.log.gz"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;yyyy-MM-dd 'at' HH:mm:ss z&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"50MB"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">"RollingFileTP"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;sys:catalina.home&#125;/logs/MITP.log"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">"$&#123;sys:catalina.home&#125;/logs/$$&#123;date:yyyy-MM&#125;/MITP-%d&#123;MM-dd-yyyy&#125;-%i.log.gz"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;yyyy-MM-dd 'at' HH:mm:ss z&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"50MB"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appenders</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--然后定义logger--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">loggers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--建立一个默认的root的logger--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"error"</span> <span class="attr">additivity</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"RollingFileFull"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.tplink"</span> <span class="attr">level</span>=<span class="string">"error"</span>  <span class="attr">additivity</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"RollingFileTP"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>tomcat logging.properties<br>和默认配置文件比只改了Catalina的输出级别为OFF<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"># Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="line"># contributor license agreements.  See the NOTICE file distributed with</span><br><span class="line"># this work for additional information regarding copyright ownership.</span><br><span class="line"># The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="line"># (the "License"); you may not use this file except in compliance with</span><br><span class="line"># the License.  You may obtain a copy of the License at</span><br><span class="line">#</span><br><span class="line">#     http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">#</span><br><span class="line"># Unless required by applicable law or agreed to in writing, software</span><br><span class="line"># distributed under the License is distributed on an "AS IS" BASIS,</span><br><span class="line"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line"># See the License for the specific language governing permissions and</span><br><span class="line"># limitations under the License.</span><br><span class="line"></span><br><span class="line">handlers = 1catalina.org.apache.juli.FileHandler, 2localhost.org.apache.juli.FileHandler, 3manager.org.apache.juli.FileHandler, 4host-manager.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler</span><br><span class="line"></span><br><span class="line">.handlers = 1catalina.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler</span><br><span class="line"></span><br><span class="line">############################################################</span><br><span class="line"># Handler specific properties.</span><br><span class="line"># Describes specific configuration info for Handlers.</span><br><span class="line">############################################################</span><br><span class="line"></span><br><span class="line">1catalina.org.apache.juli.FileHandler.level = FINE</span><br><span class="line">1catalina.org.apache.juli.FileHandler.directory = $&#123;catalina.base&#125;/logs</span><br><span class="line">1catalina.org.apache.juli.FileHandler.prefix = catalina.</span><br><span class="line"></span><br><span class="line">2localhost.org.apache.juli.FileHandler.level = FINE</span><br><span class="line">2localhost.org.apache.juli.FileHandler.directory = $&#123;catalina.base&#125;/logs</span><br><span class="line">2localhost.org.apache.juli.FileHandler.prefix = localhost.</span><br><span class="line"></span><br><span class="line">3manager.org.apache.juli.FileHandler.level = FINE</span><br><span class="line">3manager.org.apache.juli.FileHandler.directory = $&#123;catalina.base&#125;/logs</span><br><span class="line">3manager.org.apache.juli.FileHandler.prefix = manager.</span><br><span class="line"></span><br><span class="line">4host-manager.org.apache.juli.FileHandler.level = FINE</span><br><span class="line">4host-manager.org.apache.juli.FileHandler.directory = $&#123;catalina.base&#125;/logs</span><br><span class="line">4host-manager.org.apache.juli.FileHandler.prefix = host-manager.</span><br><span class="line"></span><br><span class="line">java.util.logging.ConsoleHandler.level = OFF</span><br><span class="line">java.util.logging.ConsoleHandler.formatter = java.util.logging.SimpleFormatter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">############################################################</span><br><span class="line"># Facility specific properties.</span><br><span class="line"># Provides extra control for each logger.</span><br><span class="line">############################################################</span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].level = ERROR</span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers = 2localhost.org.apache.juli.FileHandler</span><br><span class="line"></span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].level = ERROR</span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers = 3manager.org.apache.juli.FileHandler</span><br><span class="line"></span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].level = ERROR</span><br><span class="line">org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers = 4host-manager.org.apache.juli.FileHandler</span><br><span class="line"></span><br><span class="line"># For example, set the org.apache.catalina.util.LifecycleBase logger to log</span><br><span class="line"># each component that extends LifecycleBase changing state:</span><br><span class="line">#org.apache.catalina.util.LifecycleBase.level = FINE</span><br><span class="line"></span><br><span class="line"># To see debug messages in TldLocationsCache, uncomment the following line:</span><br><span class="line">#org.apache.jasper.compiler.TldLocationsCache.level = FINE</span><br></pre></td></tr></table></figure></p>
 
-          
-        
       
     </div>
     
@@ -403,228 +408,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/django/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="M Yi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My Hexo Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/26/django/" itemprop="url">使用django从数据库反转成cms系统流程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T21:07:16+08:00">
-                2018-05-26
-              </time>
+              <a href="/2018/05/26/django/" rel="next" title="使用django从数据库反转成cms系统流程">
+                <i class="fa fa-chevron-left"></i> 使用django从数据库反转成cms系统流程
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>目标：本文原目标为从已有的数据库表生成cms（后台管理）系统；也是使用django快速搭建一个网站的流程文档。</p>
-<hr>
-<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。<br>开发环境<br>不同环境下的操作步骤可能略有差异，先列出本文对应的配置环境以作区分。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">&nbsp;</th>
-<th style="text-align:right">&nbsp;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">操作系统</td>
-<td style="text-align:right">Windows10 64bit</td>
-</tr>
-<tr>
-<td style="text-align:left">Python</td>
-<td style="text-align:right">2.7.11</td>
-</tr>
-<tr>
-<td style="text-align:left">Django</td>
-<td style="text-align:right">1.9.5</td>
-</tr>
-</tbody>
-</table>
-<p>部署环境</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">&nbsp;</th>
-<th style="text-align:right">&nbsp;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">操作系统</td>
-<td style="text-align:right">Linux CentOS 6.4 64bits Server</td>
-</tr>
-<tr>
-<td style="text-align:left">Python</td>
-<td style="text-align:right">2.7.11</td>
-</tr>
-<tr>
-<td style="text-align:left">Django</td>
-<td style="text-align:right">1.9.5</td>
-</tr>
-<tr>
-<td style="text-align:left">Apache</td>
-<td style="text-align:right">2.2.15</td>
-</tr>
-<tr>
-<td style="text-align:left">mod_wsgi</td>
-<td style="text-align:right">4.5.5</td>
-</tr>
-</tbody>
-</table>
-<h2 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h2><p>下文介绍搭建、发布django项目的流程</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>下载python-2.7.11.amd64.msi安装python，配置环境变量。cms中输入python显示版本号则安装成功。<br>解压Django-1.9.5.tar.gz后进入文件夹根目录运行命令python setup.py install 安装django。<br>安装可参考<a href="http://www.ziqiangxuetang.com/django/django-install.html" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django/django-install.html</a><br>编码和配置可以参考官方文档 <a href="https://docs.djangoproject.com/en/1.9/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/1.9/</a></p>
-<h3 id="新建项目与app"><a href="#新建项目与app" class="headerlink" title="新建项目与app"></a>新建项目与app</h3><p>cms中使用命令：<br>进入想要生成项目的目录，<br>输入django-admin.py startproject xxx 来新建项目<br>进入项目目录,<br>输入python manage.py startapp xxx  新建app<br>这时候的目录结构会是<br>根目录<br>    ——项目名<br>        …<br>        ——urls.py<br>        ——settings.py<br>        …<br>    ——app名<br>        …<br>        ——admin.py<br>        ——models.py<br>        …</p>
-<h4 id="反转数据库表"><a href="#反转数据库表" class="headerlink" title="反转数据库表"></a>反转数据库表</h4><p>安装mysql-connector-python-2.1.3-py2.7-winx64.msi (只能64位系统使用，否则安装时找不到python目录，32位可以从mysql官网<a href="http://dev.mysql.com/downloads/connector/python/下载" target="_blank" rel="noopener">http://dev.mysql.com/downloads/connector/python/下载</a>)<br>目前上述mysqldb驱动在不支持python3，可以使用pymysql代替，代码上可以完全不变，只需要在项目同名目录下的urls.py中添加：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure></p>
-<p>更改settings.py的数据库连接配置,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'database name’,</span></span><br><span class="line"><span class="string">        '</span>USER<span class="string">':’user name’,</span></span><br><span class="line"><span class="string">        '</span>PASSWORD<span class="string">':'</span>password<span class="string">',</span></span><br><span class="line"><span class="string">        '</span>HOST<span class="string">':'</span>ip<span class="string">',</span></span><br><span class="line"><span class="string">        '</span>PORT<span class="string">': '</span>port<span class="string">',</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>cmd中运行python manage.py inspectdb (&gt;directory)  反转数据库，如果没有报错的话，控制台/指定目录中就已经生成了翻转后的model代码。<br>运行python manage.py makemigrations  ， python manage.py migrate 同步数据库，django会自动在数据库中生成用户及历史记录相关表，如下<br><img src="/2018/05/26/django/./图片1.png" alt="Alt text"><br>如果数据表需要更新，或者想使用model生成表时，依然使用这两个命令python manage.py makemigrations  ， python manage.py migrate更新数据库。<br>python manage.py migrate 是执行app下的文件夹migrations下的.py文件，如果migrate命令一直在报错，可能是某个py文件的更改与数据库表的状态不同步（例如python manage.py makemigrations后又更改了表结构），那么删掉冲突后的文件，重新makemigrations，就可以解决持续报错的问题。</p>
-<h4 id="配置模型"><a href="#配置模型" class="headerlink" title="配置模型"></a>配置模型</h4><p>在项目中注册app，在settings.py中加入app<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">    <span class="string">'pcms'</span>,  <span class="comment">#app名</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>为了决定cms中有哪些模型需要被管理，app目录下的admnin.py中，加入如下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span>  Article             <span class="comment">#article是model名</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ArticleAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span> <span class="comment">#如果不配置以下内容，这里的class申明可以不需要</span></span><br><span class="line"><span class="comment">#列表显示项     </span></span><br><span class="line">list_display = (<span class="string">'page_title'</span>, <span class="string">'last_update_date'</span>,<span class="string">'type'</span>)</span><br><span class="line"><span class="comment">#新增和修改时的可编辑项</span></span><br><span class="line">fields = (<span class="string">'content'</span>,)</span><br><span class="line"><span class="comment">#过滤项，group by </span></span><br><span class="line">list_filter = (<span class="string">'type'</span>,)</span><br><span class="line"><span class="comment">#搜索项</span></span><br><span class="line">search_fields = (<span class="string">'page_title'</span>,)</span><br><span class="line">    <span class="comment">#每一页显示数目</span></span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line"> </span><br><span class="line">admin.site.register(Article, ArticleAdmin)</span><br></pre></td></tr></table></figure></p>
-<p>更多配置参考 <a href="https://docs.djangoproject.com/en/1.9/ref/contrib/admin/actions/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/1.9/ref/contrib/admin/actions/</a></p>
-<h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><p>cms中使用python manage.py createsuperuser创建超级管理员，按照提示输入用户名邮箱密码就可以了。<br>python manage.py runserver 或者 python manage.py runserver 端口号 开启服务器，访问’<a href="http://localhost:8000/admin或者http://localhost:端口号/admin/" target="_blank" rel="noopener">http://localhost:8000/admin或者http://localhost:端口号/admin/</a> 进入cms。</p>
-<h4 id="更改页面模板"><a href="#更改页面模板" class="headerlink" title="更改页面模板"></a>更改页面模板</h4><p>settings.py中设置TEMPLATES=[…]中的dirs可以设置项目模板路径，设置成<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DIRS'</span>: [os.path.join(BASE_DIR,<span class="string">'templates'</span>),],</span><br></pre></td></tr></table></figure></p>
-<p>指定basedir为根目录下的templates文件夹。在自己的项目根目录下建立templates\admin两个文件夹，用于存放自定义html模板。<br>python安装目录下的<br>Python27\Lib\site-packages\Django-1.9.5-py2.7.egg\django\contrib\admin\templates\admin<br>
-文件中夹中的html文件都是cms使用的html模板，可以从那里复制文件到templates\admin下并改写。其中{%xxx%}标签进行模块表示、逻辑判断，{{xxx}}标签代表context传到模板里的变量。
-配置成功后，django就会优先使用templates\admin下的自定义模板来展示界面了。
-</p>
-<h4 id="配置静态资源根目录（开发状态）"><a href="#配置静态资源根目录（开发状态）" class="headerlink" title="配置静态资源根目录（开发状态）"></a>配置静态资源根目录（开发状态）</h4><p>页面中如果需要使用自定义的css、js、图片等，需要配置静态资源路径。<br>在自动生成的项目中，如下两个配置项应该都已经配置好了：<br>settings.py的STATIC_URL = ‘/static/‘ 和   INSTALLED_APPS里的 ‘django.contrib.staticfiles’,<br>现在要做的只有在app下建立目录\static\admin\css,在其中添加自己的css，然后在模板中通过类似于<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel="stylesheet" type="text/css" href="&#123;% static "admin/css/changelists.css" %&#125;" /&gt;</span><br></pre></td></tr></table></figure></p>
-<p> 引用。要注意的是，如果自定义css和Python27\Lib\site-packages\Django-1.9.5-py2.7.egg\django\contrib\admin\static\admin\css<br>下的css文件重名，那么django会优先使用python目录下的，目前我还没发现怎么更改优先级，所以不能重名。</p>
-<h3 id="CMS的控件扩展"><a href="#CMS的控件扩展" class="headerlink" title="CMS的控件扩展"></a>CMS的控件扩展</h3><h4 id="下拉选择框"><a href="#下拉选择框" class="headerlink" title="下拉选择框"></a>下拉选择框</h4><p>更改models.py,先加入选择框属性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">STATUS_PUBLISH = (</span><br><span class="line">    (<span class="number">0</span>, <span class="string">'UnPublished'</span>),</span><br><span class="line">    (<span class="number">1</span>, <span class="string">'Published'</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>然后将选择框应用到属性中去<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span><span class="params">(models.Model)</span>:</span>   </span><br><span class="line">publish = models.IntegerField(choices=STATUS_PUBLISH,…)</span><br></pre></td></tr></table></figure></p>
-<p>这个属性对应的编辑项就是下拉框了</p>
-<h4 id="多选框"><a href="#多选框" class="headerlink" title="多选框"></a>多选框</h4><p>这个控件需要多对多的表关联<br>对于数据库表反转生成的项目，我在models.py文件里加入的关联关系在生成表的时候会因为表名前缀冲突而失败，还没有找到解决办法。最好先在表中添加多对多关系，然后反转。<br>上面的bug可以通过安装South管理model更改来避免<a href="http://www.ziqiangxuetang.com/django/django-schema-migration.html" target="_blank" rel="noopener">http://www.ziqiangxuetang.com/django/django-schema-migration.html</a><br>默认多选框的效果是这样的：</p>
-<p>但是这个在可选项变多时不大好选择，可以在admin.py中更改ModelAdmin类来更改样式，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">	…</span><br><span class="line">	filter_horizontal = (<span class="string">'authors'</span>,)</span><br></pre></td></tr></table></figure></p>
-<p>这时样式会变成<br><img src="/2018/05/26/django/./图片2.png" alt="Alt text"></p>
-<p>同理filter_vertical = (‘verticals’,) 样式就是竖过来的。</p>
-<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><p>models.py中，更改变量类型<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">models.FileField(upload_to = …)</span><br></pre></td></tr></table></figure></p>
-<p>对应的表单域就变为文件上传控件了<br>类型改为ImageField限制为图片上传<br>后台限值文件上传或大小TODO，预测需要自定义上传方法</p>
-<h3 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h3><p>目前已知有apche和uwsgi两种部署方式，本文在项目中使用过的是apache+mod_wsgi的部署方式。</p>
-<h4 id="部署前准备："><a href="#部署前准备：" class="headerlink" title="部署前准备："></a>部署前准备：</h4><p>所需版本的python源码包、django源码包 、数据库驱动pymysql的源码包、apache模块mod_wsgi的安装包、项目中导入的第三方包列表（如果服务器不连外网则需要源码包和它们引用到的所有源码包）</p>
-<h4 id="部署步骤："><a href="#部署步骤：" class="headerlink" title="部署步骤："></a>部署步骤：</h4><p>关掉selinux，安装mysql。<br>因为centos上都有旧版本的python，所以先更新python版本，要保留旧版本python推荐看这篇博客：<a href="http://www.cnblogs.com/lanxuezaipiao/archive/2012/10/21/2732864.html。" target="_blank" rel="noopener">http://www.cnblogs.com/lanxuezaipiao/archive/2012/10/21/2732864.html。</a><br>注意该篇博客中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3</span><br></pre></td></tr></table></figure></p>
-<p>要改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --enable-shared --prefix=/usr/local/python3</span><br></pre></td></tr></table></figure></p>
-<p>来确保安装动态链接库。安装后运行python命令看到版本为自己需要的就行了。<br>编译安装apache和mod_wsgi（apache也可以用yum安装，比较快捷，但是目前内网的apache版本有点旧）。编译安装mod_wsgi后，修改配置文件httpd.conf,添加如下一行：<br>LoadModule wsgi_module modules/mod_wsgi.so<br>用来加载wsgi服务。<br>安装和配置apache和mod_wsgi容易抛的错比较多，包括缺少依赖软件、配置文件出错、没找对网站默认存放目录……安装后最好实际检验一下：<br>测试是否配置成功，创建一个test.wsgi文件(wsgi文件就是一个python module，只不过扩展名是wsgi而已)，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def application(environ,start_response):</span><br><span class="line">       start_response(&quot;200 OK&quot;,[(&apos;content-type&apos;,&quot;text/html&quot;)])</span><br><span class="line">       return [&apos;&lt;html&gt;&lt;body&gt;Hello world!&lt;/body&gt;&lt;/html&gt;&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>修改httpd.conf配置文件，添加下面一行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WSGIScriptAlias /trac  目录/test.wsgi</span><br></pre></td></tr></table></figure></p>
-<p>重启apache服务器<br>在地址栏敲入<a href="http://127.0.0.1/trac，如果输出“hello" target="_blank" rel="noopener">http://127.0.0.1/trac，如果输出“hello</a> world”说明配置成功<br>然后就是配置自己的项目了，其实要改的只有一个httpd的配置文件，目的是在最后加上<br>WSGISocketPrefix /var/run/wsgi<br>WSGIScriptAlias / /var/www/workhours/workhours/wsgi.py<br>WSGIPythonPath /var/www/workhours/<br>WSGIDaemonProcess gongshitongji.tp-link.net python-path=/var/www/workhours/:/usr/local/python27/lib/python2.7/site-packages<br>WSGIProcessGroup gongshitongji.tp-link.net</p>
-<p>Alias /static/js/ /var/www/workhours/static/js/<br>Alias /static/css/ /var/www/workhours/static/css/<br>WSGISocketPrefix /var/run/wsgi<br>WSGIScriptAlias / 项目目录/wsgi.py<br>WSGIPythonPath 项目目录<br>WSGIDaemonProcess gongshitongji.tp-link.net<br>python-path=项目目录:python目录/site-packages<br>WSGIProcessGroup gongshitongji.tp-link.net</p>
-<p>Alias /static/js/ 项目目录/static/js/<br>Alias /static/css/ 项目目录/static/css/<br>Alias /static/admin/  django目录/static/admin</p>
-<p>&lt;Directory /var/www/workhours/workhours/&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br></p>
-<p>&lt;Directory /var/www/workhours/static/js&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br></p>
-<p>&lt;Directory /var/www/workhours/static/css&gt;<br>    <files wsgi.py=""><br>        Order deny,allow<br>        Allow from all<br>    </files><br><br>这段配置定义了项目目录，静态文件目录。可以直接写在httpd.conf后面也可以自定义一个配置文件然后在httpd.conf中引用。<br>然后，重启apache，查看项目是否运行成功！<br>一般这个时候是打开django的报错页面，这时候打开apache的error.log可以看到为什么报错（一般是引用到的包没有找到），然后像开发时一样解决这些报错。<br>报错解决后，更改settings.py为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DEBUG=false</span><br><span class="line">ALLOWED_HOSTS = [&apos;*&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>就算发布成功了</p>
-<h3 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h3><p>admin的国际化可以在settings.py中设置，例如下面配置为中文。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANGUAGE_CODE = &apos;zh-hans&apos;</span><br></pre></td></tr></table></figure></p>
-<p>某些特定文字还可以通过“更改页面模板”中的手法来更改。models.py中的字段和模型本身的verbose_name也是很重要的汉化手段。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -634,202 +439,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/solr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="M Yi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My Hexo Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/24/solr/" itemprop="url">Solr调研文档</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T21:16:43+08:00">
-                2018-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>介绍Solr的功能以及搭建步骤，主要包括管理核心（core）、索引数据、中文分词、按权重搜索、高亮搜索内容等功能<br><strong>Solr</strong>是Apache公司的一个基于Lucene框架的开源全文搜索服务器<br><strong>Solr</strong>如其在官网宣传的，有如下特性</p>
-<ul>
-<li>先进的全文搜索能力：支持使用短语、通配符、集合、聚合等进行搜索</li>
-<li>为高通量网络环境优化过</li>
-<li>标准的开放接口：使用xml、json、http进行搜索和配置</li>
-<li>有功能全面的网页管理界面：使用自带的管理网页可以实现Solr支持的大部分功能：监控、配置、搜索</li>
-<li>易监控：使用JMX发布标准化的运行数据，自带slf4j日志，直接可在网页中查看</li>
-<li>可伸缩高可用：基于apache zookeeper ，易于服务器复制、分发、负载均衡</li>
-<li>易修改：每个核心（core）只需要修改两个配置文件就能作绝大部分功能的配置</li>
-<li>近实时索引</li>
-<li>易使用插件进行拓展：分词器、查询处理器都可以用自己的jar包定制</li>
-<li>富文本索引：支持对pdf、word等富文本进行索引</li>
-</ul>
-<hr>
-<h2 id="Solr官方文档"><a href="#Solr官方文档" class="headerlink" title="Solr官方文档"></a>Solr官方文档</h2><blockquote>
-<p>Solr官方的quickstart文档<a href="http://lucene.apache.org/solr/quickstart.html" target="_blank" rel="noopener">http://lucene.apache.org/solr/quickstart.html</a> ，直接搭建一个2个服务器2个shard组成的搜索服务器，帮助对solr的数据索引、搜索、分布式结构有所了解。缺点时文档使用的很多命令只在linux下生效，可以结合下文的使用流程使用windows下能用的命令<br>Solr官方文档 <a href="https://cwiki.apache.org/confluence/display/solr/About+This+Guide" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/About+This+Guide</a> 这是在线版的官方文档，有所有功能的介绍，但是举例和异常处理方式不大详细，没有对中文的特殊处理。网络上介绍solr的博客类文档恰好能补充，但因为solr版本繁杂，需要对照官方文档阅读。</p>
-</blockquote>
-<h2 id="Solr初步使用流程"><a href="#Solr初步使用流程" class="headerlink" title="Solr初步使用流程"></a>Solr初步使用流程</h2><p>下文介绍一个solr安装使用的例子，目标是对一批简历数据进行搜索。</p>
-<h3 id="例中软件环境"><a href="#例中软件环境" class="headerlink" title="例中软件环境"></a>例中软件环境</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">软件名称</th>
-<th style="text-align:right">软件版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">操作系统</td>
-<td style="text-align:right">Windows10</td>
-</tr>
-<tr>
-<td style="text-align:left">JAVA版本</td>
-<td style="text-align:right">Java8 </td>
-</tr>
-<tr>
-<td style="text-align:left">Solr版本</td>
-<td style="text-align:right">Solr6.6.0</td>
-</tr>
-<tr>
-<td style="text-align:left">中文分词器</td>
-<td style="text-align:right">IK</td>
-</tr>
-</tbody>
-</table>
-<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><h4 id="1-下载安装Java"><a href="#1-下载安装Java" class="headerlink" title="1.下载安装Java"></a>1.下载安装Java</h4><p>目前版本的solr最低需要Java8，下载并安装。</p>
-<h4 id="2-下载Solr并解压"><a href="#2-下载Solr并解压" class="headerlink" title="2.下载Solr并解压"></a>2.下载Solr并解压</h4><p>官方下载页 <a href="http://lucene.apache.org/solr/mirrors-solr-latest-redir.html" target="_blank" rel="noopener">http://lucene.apache.org/solr/mirrors-solr-latest-redir.html</a> 下载后是个压缩包，解压后就算安装完成了</p>
-<h4 id="3-运行solr服务器"><a href="#3-运行solr服务器" class="headerlink" title="3.运行solr服务器"></a>3.运行solr服务器</h4><p>通过bin目录下的solr文件启动solr服务器，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin\solr start -p 8983</span><br></pre></td></tr></table></figure></p>
-<p>其中<strong>-p 8983</strong>是指定端口的参数，如果不指定默认开启的端口也是8983.</p>
-<h4 id="4-创建核心（core）"><a href="#4-创建核心（core）" class="headerlink" title="4.创建核心（core）"></a>4.创建核心（core）</h4><p>核心（core）是solr的一种概念，同一个core中使用同一份字段类型定义、同样的查询配置。搜索时也是需要指定某一个core进行查询的。<br>使用指令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin\solr create -c corename1</span><br></pre></td></tr></table></figure></p>
-<p>创建一个叫corename1的core。<br>或者，在<a href="http://localhost:8983/solr/#/" target="_blank" rel="noopener">http://localhost:8983/solr/#/</a> 的管理网页上的coreadmin菜单中也可以创建一个core<br>5.根据目标数据配置schema</p>
-<h4 id="Schema的意义"><a href="#Schema的意义" class="headerlink" title="#Schema的意义"></a>#Schema的意义</h4><p>搜索服务器建立数据索引的过程其实是按照固定格式导入数据，如何定义导入数据的格式就是由schema决定的了。schema定义了一些字段类型（field type）和字段（field），如果把要导入的数据类比为java中的对象，字段类型（field type）和字段（field）就类似于java中的变量类型和变量。在创建一个core之后，会自动在对应的core目录下的conf文件夹生成一个    managed-schema文件，这是由solr实时修改的schema配置文件，原则上不能直接修改。需要配置可以在网页端的schema页面进行修改。</p>
-<h4 id="Schema-xml文件关系"><a href="#Schema-xml文件关系" class="headerlink" title="#Schema.xml文件关系"></a>#Schema.xml文件关系</h4><p>如果要批量修改schema的字段配置，可以直接编辑文件schema.xml。在config目录下和schema配置相关的有这么三个文件：<br><img src="/2018/05/24/solr/图片1.png" alt="Alt text"><br>一般技术博客会提到的文件是schema.xml，但是在6.6.0版本中schema.xml文件是不存在的，需要用户自己创建。他们之间的关系如下;<img src="/2018/05/24/solr/图片2.png" alt="Alt text"><br>由关系图可见，要编辑schema文件，需要先删除managed-schema.xml和schema.xml.bak文件，自定义schema.xml，如果服务器重启后正确生成了managed-schema.xml和schema.xml.bak那说明配置成功，否则需要查看报错日志，修改schema.xml中的错误。<br>在初次配置之后想要修改配置文件，那就只需要修改schema.xml.bak再删除managed-schema.xml重启就行了。</p>
-<h5 id="Schema-xml文件内容格式"><a href="#Schema-xml文件内容格式" class="headerlink" title="Schema.xml文件内容格式"></a>Schema.xml文件内容格式</h5><p>Schema中主要内容是field和field type的定义。自动生成的managed-schema中有不少通用的field和field type定义，要自定义时可以仿照。<br>field定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;field name=<span class="string">"school"</span> type=<span class="string">"text_ik"</span> <span class="keyword">default</span>=<span class="string">""</span> indexed=<span class="string">"true"</span> stored=<span class="string">"true"</span>/&gt;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">这个例子里是五个常用的field属性 </span></span><br><span class="line"><span class="string">| &amp;nbsp;       |    &amp;nbsp;</span></span><br><span class="line"><span class="string">| :-------- | --------:</span></span><br><span class="line"><span class="string">| name	| 字段名，和要导入数据的字段名要一一对应</span></span><br><span class="line"><span class="string">| type	| 字段类型，要等于某个fieldtype</span></span><br><span class="line"><span class="string">| default	| 默认值</span></span><br><span class="line"><span class="string">| indexed	| 是否被索引，只有被索引的字段才能用于搜索</span></span><br><span class="line"><span class="string">| stored	| 是否被保存，只有被保存的字段才能被搜索后获取</span></span><br><span class="line"><span class="string">更多属性见https://cwiki.apache.org/confluence/display/solr/Defining+Fields</span></span><br><span class="line"><span class="string">field type定义：</span></span><br><span class="line"><span class="string">正如java中的类型一样，text、long……等常用类型已经在自动生成的配置中有了，对中文搜索来说，最重要的需要新定义的field type应该是中文文本类型了。定义前需要选定中文分词器，我试过两种smartcn和ik分词。</span></span><br><span class="line"><span class="string">smartcn是solr下载后自带的，在solr-6.6.0\contrib\analysis-extras\lucene-libs\ lucene-analyzers-smartcn-6.6.0.jar。但是smartcn是纯粹的计算分词，没有使用分词表进行拓展。拷贝jar包到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\lib下（solr-6.6.0\server\solr-webapp\下的目录结构类似于j2ee网站的结构），并在schema.xml中如此配置：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span> javascript</span><br><span class="line">&lt;fieldType name=<span class="string">"text_smartcn"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span> positionIncrementGap=<span class="string">"0"</span>&gt;</span><br><span class="line">&lt;analyzer type=<span class="string">"index"</span>&gt;</span><br><span class="line">   &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory"</span>/&gt;</span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">&lt;analyzer type="query"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;tokenizer class="org.apache.lucene.analysis.cn.smart.HMMChineseTokenizerFactory"/</span>&gt;</span><br><span class="line"> &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Ik分词版本较多，而且github上的版本已经很旧了，但是它支持使用分词表帮助分词。<br>依然是把jar包放到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\lib下，把剩下的一个xml和两个dc文件放到solr-6.6.0\server\solr-webapp\webapp\WEB-INF\classes下，然后在schema.xml中加入如下内容<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;fieldType name=<span class="string">"text_ik"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span>&gt;</span><br><span class="line">    &lt;analyzer type=<span class="string">"index"</span>&gt;</span><br><span class="line">      &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.wltea.analyzer.lucene.IKTokenizerFactory"</span> useSmart=<span class="string">"false"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">    &lt;analyzer type="query"&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" useSmart="true" /</span>&gt;</span><br><span class="line">      &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.SynonymGraphFilterFactory"</span> synonyms=<span class="string">"synonyms.txt"</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/analyzer&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
-<p>fieldtype定义好中文类型后，在field中指定对应的类型，之后的索引和搜索对于中文处理就变得简单了。</p>
-<h4 id="6-建立索引-导入数据"><a href="#6-建立索引-导入数据" class="headerlink" title="6 .建立索引/导入数据"></a>6 .建立索引/导入数据</h4><p>Solr支持的导入数据来源有数据库\xml\json\富文本。</p>
-<h5 id="导入xml-json-富文本"><a href="#导入xml-json-富文本" class="headerlink" title="导入xml\json\富文本"></a>导入xml\json\富文本</h5><p>可以使用网页、命令行方式、api方式导入数据,目前看来在win10中网页导入文本文件有bug，就先介绍命令行方式这种最快的方式。<br>导入文件要使用post工具，官方文档的指令在windows下不能使用，在命令行中输入类似指令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Dc=[corename] -Dauto=yes -Ddata=files -Drecursive=yes -jar example/exampledocs/post.jar G:\abc\*.json</span><br></pre></td></tr></table></figure></p>
-<p>需要填写的两个参数：dc是目标core的名字；最后用空格隔开的是目标文件，支持直接使用文件名和通配符，上面的例子指导入abc目录下所有.json文件。<br>如果导入的是富文本文件，富文本的内容不会像解析json一样按字段存储，而是存储为文件信息和内容两部分。</p>
-<h5 id="导入数据库表"><a href="#导入数据库表" class="headerlink" title="导入数据库表"></a>导入数据库表</h5><p>涉及到solr唯二配置文件中的solrconfig.xml，在solrconfig.xml中额外指定dataconfig.xml,用于设置数据库连接参数、查询语句、数据库字段与solr field的对应关系<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;requestHandler name=<span class="string">"/dataimport"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;  </span><br><span class="line">　     &lt;lst name=<span class="string">"defaults"</span>&gt;  </span><br><span class="line">　        &lt;str name=<span class="string">"config"</span>&gt;conf/dataconfig.xml&lt;<span class="regexp">/str&gt;  </span></span><br><span class="line"><span class="regexp">　     &lt;/</span>lst&gt;  </span><br><span class="line">　&lt;<span class="regexp">/requestHandler&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>以搜索简历为例，dataconfig.xml:中这样设置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;  </span><br><span class="line">&lt;dataConfig&gt;</span><br><span class="line">&lt;!-- The first element is the dataSource, <span class="keyword">in</span> <span class="keyword">this</span> <span class="keyword">case</span> an HSQLDB database.</span><br><span class="line">     The path to the JDBC driver and the JDBC URL and login credentials are all specified here.</span><br><span class="line">     Other permissible attributes include whether or not to autocommit to Solr, the batchsize</span><br><span class="line">     used <span class="keyword">in</span> the JDBC connection, a <span class="string">'readOnly'</span> flag. </span><br><span class="line">     The password attribute is optional <span class="keyword">if</span> there is no password set <span class="keyword">for</span> the DB.</span><br><span class="line">--&gt;</span><br><span class="line">  &lt;dataSource driver=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> url=<span class="string">"jdbc:oracle:thin:@172.29.88.178:1521:DBTEST"</span> user=<span class="string">"resumetest"</span> password=<span class="string">"resumetest"</span>/&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">Alternately the password can be encrypted <span class="keyword">as</span> follows. This is the value obtained <span class="keyword">as</span> a result <span class="keyword">of</span> the command</span><br><span class="line">openssl enc -aes<span class="number">-128</span>-cbc -a -salt -<span class="keyword">in</span> pwd.txt</span><br><span class="line">password=<span class="string">"U2FsdGVkX18QMjY0yfCqlfBMvAB4d3XkwY96L7gfO2o="</span> </span><br><span class="line">WHen the password is encrypted, you must provide an extra attribute</span><br><span class="line">encryptKeyFile=<span class="string">"/location/of/encryptionkey"</span></span><br><span class="line">This file should a text file <span class="keyword">with</span> a single line containing the encrypt/decrypt password</span><br><span class="line"> </span><br><span class="line">--&gt;</span><br><span class="line">&lt;!-- A <span class="string">'document'</span> element follows, containing multiple <span class="string">'entity'</span> elements.</span><br><span class="line">     Note that <span class="string">'entity'</span> elements can be nested, and <span class="keyword">this</span> allows the entity</span><br><span class="line">     relationships <span class="keyword">in</span> the sample database to be mirrored here, so that we can</span><br><span class="line">     generate a denormalized Solr record which may include multiple features</span><br><span class="line">     <span class="keyword">for</span> one item, <span class="keyword">for</span> instance --&gt;</span><br><span class="line">  &lt;<span class="built_in">document</span>&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- The possible attributes <span class="keyword">for</span> the entity element are described below.</span><br><span class="line">     Entity elements may contain one or more <span class="string">'field'</span> elements, which map</span><br><span class="line">     the data source field names to Solr fields, and optionally specify</span><br><span class="line">     per-field transformations --&gt;</span><br><span class="line">&lt;!-- <span class="keyword">this</span> entity is the <span class="string">'root'</span> entity. --&gt;</span><br><span class="line">    &lt;entity name=<span class="string">"resume"</span> query=<span class="string">"select * from RESUME"</span></span><br><span class="line">            deltaQuery=<span class="string">"select id from item where LAST_UPDATE_DATE &gt; '$&#123;dataimporter.last_index_time&#125;'"</span> pk=<span class="string">"id"</span> transformer=<span class="string">"ClobTransformer"</span>&gt;</span><br><span class="line">      &lt;field column=<span class="string">"RESUME_ID"</span> name=<span class="string">"id"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"TAG_ID"</span> name=<span class="string">"tagID"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"STAGE_ID"</span> name=<span class="string">"stageId"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"DEPT_ID"</span> name=<span class="string">"deptId"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"FLAG"</span> name=<span class="string">"flag"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"RESUME_NUMBER"</span> name=<span class="string">"resumeNumber"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NAME"</span> name=<span class="string">"name"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SEX"</span> name=<span class="string">"sex"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POSITION"</span> name=<span class="string">"position"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POSITION_DETAIL"</span> name=<span class="string">"positionDetail"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EDUCATION"</span> name=<span class="string">"education"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOOL"</span> name=<span class="string">"school"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"PHONE"</span> name=<span class="string">"phone"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EMAIL"</span> name=<span class="string">"email"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ADDRESS"</span> name=<span class="string">"address"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"BIRTHDAY"</span> name=<span class="string">"birthday"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"HEIGHT"</span> name=<span class="string">"height"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"WEIGHT"</span> name=<span class="string">"weight"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"GRADUATION_DATE"</span> name=<span class="string">"graduationDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"HEALTH_CONDITION"</span> name=<span class="string">"healthCondition"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"MARITAL_STATUS"</span> name=<span class="string">"maritalStatus"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"REGISTERED_PLACE_BEFORE"</span> name=<span class="string">"registeredPlaceBefore"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"IDENTITY_CARD_NUMBER"</span> name=<span class="string">"identityCardNumber"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"OVERSEAS_EXPERIENCE"</span> name=<span class="string">"overseasExperience"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"POLITICAL_STATUS"</span> name=<span class="string">"politicalStatus"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CITY"</span> name=<span class="string">"city"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EMERGENCY_PHONE"</span> name=<span class="string">"emergencyPhone"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NATIONALITY"</span> name=<span class="string">"nationality"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"NATIVE_PLACE"</span> name=<span class="string">"nativePlace"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SELF_EVALUATION_TITLE"</span> name=<span class="string">"selfEvaluationTitle"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SELF_EVALUATION_CONTENT"</span> name=<span class="string">"selfEvalutionContent"</span> clob=<span class="string">"true"</span>/&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOLARSHIP_LEVEL"</span> name=<span class="string">"scholarshipLevel"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"STUDENT_LEADER"</span> name=<span class="string">"studentLeader"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"SCHOOL_ACTIVITY"</span> name=<span class="string">"schoolActivity"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"AWARD"</span> name=<span class="string">"award"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CERTIFICATE"</span> name=<span class="string">"certificate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_LEVEL"</span> name=<span class="string">"englishLevel"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_SCORE"</span> name=<span class="string">"englishScore"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_CERTIFICATE1"</span> name=<span class="string">"englishCertificate1"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"ENGLISH_CERTIFICATE2"</span> name=<span class="string">"englishCertificate2"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LANGUAGE"</span> name=<span class="string">"language"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"COMPUTER_SKILL"</span> name=<span class="string">"computerSkill"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"INTEREST"</span> name=<span class="string">"interest"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_JOB"</span> name=<span class="string">"expectedJob"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_CITY"</span> name=<span class="string">"expectedCity"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"EXPECTED_SALARY"</span> name=<span class="string">"expectedSalary"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CREATED_BY"</span> name=<span class="string">"createdBy"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CREATION_DATE"</span> name=<span class="string">"CreationDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LAST_UPDATED_BY"</span> name=<span class="string">"lastUpdateBy"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"LAST_UPDATE_DATE"</span> name=<span class="string">"lastUpdateDate"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"VERSION"</span> name=<span class="string">"version"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"MAJOR"</span> name=<span class="string">"major"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"BK_MAJOR"</span> name=<span class="string">"bkMajor"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"TAG_NOTE"</span> name=<span class="string">"tagNote"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"CHECK_IN_FLAG"</span> name=<span class="string">"checkinFlag"</span> /&gt;</span><br><span class="line">      &lt;field column=<span class="string">"FROZEN_FLAG"</span> name=<span class="string">"frozenFlag"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/entity&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span><span class="built_in">document</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/dataConfig&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>配置完毕后，使用网页操作导入数据<br><img src="/2018/05/24/solr/图片3.png" alt="Alt text"></p>
-<h4 id="7-进行标准查询"><a href="#7-进行标准查询" class="headerlink" title="7.进行标准查询"></a>7.进行标准查询</h4><p>导入数据后，在solr的网页中就可以进行查询了，可配置参数如下<img src="/2018/05/24/solr/图片4.png" alt="Alt text"><br>我填写的这些参数的含义：<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| q|     搜索内容<br>| fq|     对结果进行过滤，对某些字段的严格限制，类似于sql语句中的where field=value<br>| sort    | 排序字段，使用字段+空格+asc/desc表示排序方式<br>| start rows|     两个分页字段<br>| fl|     类似于sql的投影，限制返回的字段<br>| df        | 限制被查询的字段<br>| wt    | 结果返回的格式<br>| indent    true or false |控制结果是否缩进<br>| debug|    返回结果中显示哪些debug信息，query/timing/results/all(true)备选<br>更多参数见<a href="https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters#CommonQueryParameters-ThesortParameter" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters#CommonQueryParameters-ThesortParameter</a></p>
-<h4 id="8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表"><a href="#8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表" class="headerlink" title="8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表"></a>8搜索结果的初步优化——edismax搜索和编辑分词表、停用词表</h4><p>搜索简历的过程中，遇到下面几种情况：<br>| &nbsp;       |    &nbsp; |    &nbsp;<br>| :——– | ——–| ——–:<br>| 搜索“南大”、“北大”，首先出来的是“东南大学”“东北大学”| solr认为文字的完全匹配有最高优先级，就算设置了同义词，搜索“南大”，东南大学和南京大学的比重也是等同的| 对于明显有特指的大学简称，设置单向同义词。在同义词表solr-6.6.0\server\solr\resume5\conf下，新增 北大 =&gt; 北京大学 的配置，对于其它常用大学简称，都设置双向同义词 西南财经大学,西南财大,西财,SWUFE<br>|某些大学缩写不被识别，搜索“南农”，会返回对“南”的搜索和“农”的搜索|正常语境中“X大”“上X”类的词语确实不该独立成词，但是在简历这种情况下需要这些词语成立| 对大学同义词表中的所有简称词，添加到拓展词典\solr-6.6.0\server\solr-webapp\webapp\WEB-INF\classes\mydict.dic中<br>| 搜索姓名“X波”，结果中地址、专业、简介的“电磁波”干扰了我的目标| 所有字段权值一样，姓名被分词后再各字段里都会出现|使用dismax/edismax搜索方式，给搜索的字段加上权重，给姓名和学校赋予最高权值。因为solr默认的算法设置中，对于“地址”这个20-30字的字段最容易返回，因此适当降低了搜索时对于“地址”的权重<br>edismax的参数如下：<img src="/2018/05/24/solr/图片5.png" alt="Alt text"><br>常用参数设置：<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| q.alt|     当标准查询参数q不存在时生效的参数<br>| qf|     查询权重，格式字段名^权重 字段名^权重,默认权重为1。没有列出的字段不会被查询<br>| mm|结果返回数量，可以是数字和百分数的组合 3 代表只留3个；75%表示只留搜索结果的前75%；3&lt;75%表示最少保留max[3,75%]个结果；-号代表要去除的结果数量，如-3代表只去除3个结果<br>| pf|     排序权重，参数格式和qf完全一样，但是它不会把不符合的结果去除掉，只影响排序。</p>
-<p>edismax搜索还可以使用bf参数做自定义权值，参考<a href="https://cwiki.apache.org/confluence/display/solr/The+DisMax+Query+Parser" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/The+DisMax+Query+Parser</a> ，如果数据里有重要的数字、频率如点击率、发布日期……可以考虑用bf写一个简单的自定义权值。因为简历主要是文本，手写文档关系的算法比较复杂，我选择就使用qf，依赖于lucene的文档关系算法。</p>
-<h4 id="9-使用java借助solr搜索"><a href="#9-使用java借助solr搜索" class="headerlink" title="9.使用java借助solr搜索"></a>9.使用java借助solr搜索</h4><p>solr的外部调用方式很多，直接使用js写post请求访问solr服务器、对java\ruby\python都有调用API。Java的api比起直接用js，优点是不用自己拼查询url。对于maven项目，只需要添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.solr&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;solr-solrj&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;6.6.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>就足够调用solrj了，但是要下载的文件比较多，更新maven慢。Java代码中关键的代码不多，像下面的代码就已经能发起一次标准查询了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SolrClient solr = <span class="keyword">new</span> HttpSolrClient.Builder(solrUrl).build();</span><br><span class="line">        SolrQuery query = <span class="keyword">new</span> SolrQuery();</span><br><span class="line">        query.setQuery(searchParams.getQueryString());</span><br><span class="line">        query.set(<span class="string">"start"</span>, start);</span><br><span class="line">        query.set(<span class="string">"rows"</span>, limit);</span><br><span class="line">        query.set(<span class="string">"wt"</span>, <span class="string">"json"</span>);</span><br><span class="line"></span><br><span class="line">QueryResponse rsp = solr.query(query);</span><br><span class="line">SolrDocumentList docs = rsp.getResults();</span><br></pre></td></tr></table></figure></p>
-<p>Solr的高亮只需要一个hl参数，但是高亮哪些字段受到qf字段（dismax查询的权重字段）、hl.fl字段的影响。在没有设置qf时，hl.fl代表哪些字段会高亮，有qf时以qf为准。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query.setHighlight(<span class="keyword">true</span>);</span><br><span class="line">query.set(<span class="string">"defType"</span>, <span class="string">"dismax"</span>);</span><br><span class="line">query.set(<span class="string">"hl.fl"</span>,<span class="string">"*"</span>);</span><br><span class="line">query.set(<span class="string">"hl.usePhraseHighlighter"</span>,<span class="keyword">true</span>);</span><br><span class="line">query.set(<span class="string">"hl.highlightMultiTerm"</span>,<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">query.set(<span class="string">"hl.simple.pre"</span>,<span class="string">"&lt;span class=\"highlight\"&gt;"</span>);</span><br><span class="line">query.set(<span class="string">"hl.simple.post"</span>,<span class="string">"&lt;/span&gt;"</span>);</span><br><span class="line">query.set(<span class="string">"qf"</span>,<span class="string">"school^90 name^90 address^0.05 resumeNumber^1 position^90 education^1 major^5 telephone^1 mail^1"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>返回的高亮部分内容是作为一个独立的结构返回的，和我们在baidu、google搜索引擎里看到的结果不大一样。需要在获取后做一个处理:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">hlDocs.setNumFound(docs.getNumFound());</span><br><span class="line">Map&lt;String,Map&lt;String,List&lt;String&gt;&gt;&gt; tempMap = rsp.getHighlighting();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;docs.size();i++) &#123;</span><br><span class="line">    SolrDocument doc = docs.get(i);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"name"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"name"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"name"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"school"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"school"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"school"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"address"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"address"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"address"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"resumeNumber"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"resumeNumber"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"resumeNumber"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"position"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"position"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"position"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"education"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"education"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"education"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"major"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"major"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"major"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"telephone"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"telephone"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"telephone"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span>!=tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"mail"</span>)) &#123;</span><br><span class="line">        doc.setField(<span class="string">"mail"</span>, tempMap.get(doc.getFieldValue(<span class="string">"id"</span>)).get(<span class="string">"mail"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    hlDocs.add(doc);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> hlDocs;</span><br></pre></td></tr></table></figure></p>
-<p>到这一步已经能做出一个较为完整的搜索简历的服务了。但是字段的权值、中文分词得不断根据实际数据变化和用户反馈改进才行，下面是一些能提高solr搜索结果满意度的方法。</p>
-<h3 id="Solr功能拓展"><a href="#Solr功能拓展" class="headerlink" title="Solr功能拓展"></a>Solr功能拓展</h3><h4 id="1-聚类搜索"><a href="#1-聚类搜索" class="headerlink" title="1.聚类搜索"></a>1.聚类搜索</h4><p>很多网站提供的分类别搜索，在solr里配置facet相关参数就可以做到。<br><img src="/2018/05/24/solr/图片6.png" alt="Alt text"><br>facet常用参数如下:<br><img src="/2018/05/24/solr/图片7.png" alt="Alt text"><br>facet.field代表要分类的字段，如果要分类多个字段，需要再设置一个facet字段。返回结果会在通常的查询结果后缀一个分类查询结果，如下图：<br><img src="/2018/05/24/solr/图片8.png" alt="Alt text"><br>facet分类还支持根据时间分类、根据数字区间分类、分类过滤，详细内容见<a href="https://cwiki.apache.org/confluence/display/solr/Faceting#Faceting-Thefacet.fieldParameter" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/Faceting#Faceting-Thefacet.fieldParameter</a></p>
-<h4 id="2-拼音搜索"><a href="#2-拼音搜索" class="headerlink" title="2.拼音搜索"></a>2.拼音搜索</h4><p>增加拼音搜索的功能只要有能识别拼音的分词器就行了，找到拼音分词的jar包放到<br>WEB-INF/lib目录下，配合smartcn分词包或ik分词包使用。然后依然是在schema.xml中定义新的fieldtype<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;fieldType name=<span class="string">"text_pinyin"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"solr.TextField"</span> positionIncrementGap=<span class="string">"0"</span>&gt; </span><br><span class="line">   &lt;analyzer type=<span class="string">"index"</span>&gt; </span><br><span class="line">   &lt;tokenizer <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseSentenceTokenizerFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseWordTokenFilterFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinTransformTokenFilterFactory"</span> minTermLenght=<span class="string">"2"</span> /&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinNGramTokenFilterFactory"</span> minGram=<span class="string">"6"</span> maxGram=<span class="string">"20"</span> /&gt; </span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt; </span></span><br><span class="line"><span class="regexp">   &lt;analyzer type="query"&gt; </span></span><br><span class="line"><span class="regexp">   &lt;tokenizer class="org.apache.lucene.analysis.cn.smart.SmartChineseSentenceTokenizerFactory"/</span>&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.apache.lucene.analysis.cn.smart.SmartChineseWordTokenFilterFactory"</span>/&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinTransformTokenFilterFactory"</span> minTermLenght=<span class="string">"2"</span> /&gt; </span><br><span class="line">   &lt;filter <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.shentong.search.analyzers.PinyinNGramTokenFilterFactory"</span> minGram=<span class="string">"6"</span> maxGram=<span class="string">"20"</span> /&gt; </span><br><span class="line">   &lt;<span class="regexp">/analyzer&gt; </span></span><br><span class="line"><span class="regexp">&lt;/</span>fieldType&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="3-相似数据推荐"><a href="#3-相似数据推荐" class="headerlink" title="3.相似数据推荐"></a>3.相似数据推荐</h4><p>类似于大多数网站的相似产品推荐，solr也提供了这种功能——morelikethis。通过制定搜索结果和某个字段，solr查找出在该字段上与当前搜索结果类似的结果。如果字段配置了termVectors=”true”，那么推荐会更加准确。下面这个搜索代表搜索resumeid为58901简历的类似简历，以专业为主要关联字段。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select? resumeId=<span class="number">58901</span>&amp;mlt=<span class="literal">true</span>&amp;mlt.fl=major&amp;mlt.mindf=<span class="number">1</span>&amp;mlt.mintf=<span class="number">1</span>&amp;wt=json</span><br></pre></td></tr></table></figure></p>
-<p>基本参数如下:<br>| &nbsp;       |    &nbsp;<br>| :——– | ——–:<br>| mlt    |     是否开启推荐<br>| mlt|     推荐的字段<br>| mlt.mintf    | 被关联文档里关键词出现次数多于这个值被忽略<br>| mlt.mindf|     所有文档里出现次数多于这个值的关键词被忽略<br>更详细的内容见<a href="https://cwiki.apache.org/confluence/display/solr/MoreLikeThis" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/solr/MoreLikeThis</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -837,6 +451,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -857,8 +475,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -900,6 +527,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#log4j（1-2-x）"><span class="nav-number">1.</span> <span class="nav-text">log4j（1.2.x）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#log4j实现源码"><span class="nav-number">1.1.</span> <span class="nav-text">log4j实现源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log4j使用配置"><span class="nav-number">1.2.</span> <span class="nav-text">log4j使用配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置根Logger："><span class="nav-number">1.2.1.</span> <span class="nav-text">配置根Logger：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置日志信息输出目的地（appender）："><span class="nav-number">1.2.2.</span> <span class="nav-text">配置日志信息输出目的地（appender）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置日志信息的输出格式（Layout）："><span class="nav-number">1.2.3.</span> <span class="nav-text">配置日志信息的输出格式（Layout）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#屏蔽框架输出日志干扰"><span class="nav-number">1.2.4.</span> <span class="nav-text">屏蔽框架输出日志干扰</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件总览"><span class="nav-number">1.2.5.</span> <span class="nav-text">配置文件总览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同项目内多个logger配置"><span class="nav-number">1.2.6.</span> <span class="nav-text">同项目内多个logger配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Appender"><span class="nav-number">1.3.</span> <span class="nav-text">自定义Appender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志性能优化"><span class="nav-number">1.4.</span> <span class="nav-text">日志性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用xml配置"><span class="nav-number">1.5.</span> <span class="nav-text">使用xml配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log4j2"><span class="nav-number">2.</span> <span class="nav-text">log4j2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-log4j2优点"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.log4j2优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log4j2的使用配置"><span class="nav-number">2.2.</span> <span class="nav-text">log4j2的使用配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入包"><span class="nav-number">2.2.1.</span> <span class="nav-text">导入包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#log4j迁移到log4j2"><span class="nav-number">2.2.3.</span> <span class="nav-text">log4j迁移到log4j2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#屏蔽框架输出日志干扰-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">屏蔽框架输出日志干扰</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat日志"><span class="nav-number">3.</span> <span class="nav-text">Tomcat日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat日志种类介绍"><span class="nav-number">3.1.</span> <span class="nav-text">Tomcat日志种类介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat日志配置"><span class="nav-number">3.2.</span> <span class="nav-text">Tomcat日志配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认JULI实现下的配置"><span class="nav-number">3.2.1.</span> <span class="nav-text">默认JULI实现下的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#logging-properties的三段结构"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">logging.properties的三段结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Access-Logging的特殊性"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">Access Logging的特殊性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-使用Log4j实现Tomcat日志"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.使用Log4j实现Tomcat日志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat-log4j日志方案示例"><span class="nav-number">4.</span> <span class="nav-text">Tomcat+log4j日志方案示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发环境推荐配置"><span class="nav-number">4.1.</span> <span class="nav-text">开发环境推荐配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找特定bug时的推荐配置"><span class="nav-number">4.2.</span> <span class="nav-text">查找特定bug时的推荐配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试、正式环境推荐配置"><span class="nav-number">4.3.</span> <span class="nav-text">测试、正式环境推荐配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1033,6 +676,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
